@@ -11,7 +11,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { AppConfigService } from './app-config.service';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatKeyboardModule } from 'ngx7-material-keyboard';
+import { MatKeyboardModule } from '@ngx-material-keyboard/core';
 
 const appInitialization = (appConfig: AppConfigService) => {
   return () => {

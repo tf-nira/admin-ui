@@ -33,7 +33,7 @@ import {
   MatKeyboardRef,
   MatKeyboardComponent,
   MatKeyboardService
-} from 'ngx7-material-keyboard';
+} from '@ngx-material-keyboard/core';
 import { AuditService } from 'src/app/core/services/audit.service';
 import * as centerSpecFile from '../../../../../assets/entity-spec/center.json';
 import { HeaderService } from 'src/app/core/services/header.service';

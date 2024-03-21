@@ -11,7 +11,7 @@ import { AppConfigService } from './app-config.service';
 import { MatDialog } from '@angular/material';
 import { DialogComponent } from './shared/dialog/dialog.component';
 import { TranslateService } from '@ngx-translate/core';
-import {MatKeyboardService} from 'ngx7-material-keyboard';
+import {MatKeyboardService} from '@ngx-material-keyboard/core';
 
 @Component({
   selector: 'app-root',

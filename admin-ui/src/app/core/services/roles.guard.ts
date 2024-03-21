@@ -7,7 +7,7 @@ import { MatDialog } from '@angular/material';
 import { DialogComponent } from 'src/app/shared/dialog/dialog.component';
 import { AppConfigService } from 'src/app/app-config.service';
 import { TranslateService } from '@ngx-translate/core';
-import {MatKeyboardService} from 'ngx7-material-keyboard';
+import {MatKeyboardService} from '@ngx-material-keyboard/core';
 
 @Injectable({
   providedIn: 'root'
