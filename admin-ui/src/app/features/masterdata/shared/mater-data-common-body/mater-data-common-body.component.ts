@@ -18,7 +18,7 @@ import {
   MatKeyboardRef,
   MatKeyboardComponent,
   MatKeyboardService
-} from 'ngx7-material-keyboard';
+} from '@ngx-material-keyboard/core';
 
 import { DialogComponent } from 'src/app/shared/dialog/dialog.component';
 import { MatDialog } from '@angular/material';

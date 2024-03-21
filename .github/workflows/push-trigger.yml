@@ -23,7 +23,7 @@ on:
 
 jobs:
   build-admin-ui:
-    uses: mosip/kattu/.github/workflows/npm-build.yml@master
+    uses: mosip/kattu/.github/workflows/npm-build.yml@develop
     with:
       SERVICE_LOCATION: ./admin-ui
       BUILD_ARTIFACT: admin-ui

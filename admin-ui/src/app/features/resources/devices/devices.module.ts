@@ -10,7 +10,7 @@ import { MaterialModule } from 'src/app/shared/material.module';
 import { DevicesHeaderComponent } from './devices-header/devices-header.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StatusPipe } from 'src/app/shared/pipes/status.pipe';
-import { MatKeyboardModule } from 'ngx7-material-keyboard';
+import { MatKeyboardModule } from '@ngx-material-keyboard/core';
 
 
 @NgModule({

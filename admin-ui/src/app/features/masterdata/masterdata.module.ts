@@ -12,7 +12,7 @@ import { ListViewComponent } from './list-view/list-view.component';
 import { SingleViewComponent } from './single-view/single-view.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { DocumentCategoryMappingComponent } from './document-category-mapping/document-category-mapping.component';
-import { MatKeyboardModule } from 'ngx7-material-keyboard';
+import { MatKeyboardModule } from '@ngx-material-keyboard/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
