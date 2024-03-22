@@ -340,6 +340,7 @@ public class Commons  extends BaseClass{
 		Commons.enter(test,driver, by, data);
 
 		Commons.click(test,driver, By.id("createButton"));
+		Commons.click(test,driver,By.id("confirmpopup"));
 		Commons.click(test,driver, By.id("confirmmessagepopup")); 
 
 		 logger.info("Click Edit and Confirm" + by + data);
@@ -428,8 +429,8 @@ public class Commons  extends BaseClass{
 	public static void create(ExtentTest test,WebDriver driver) throws IOException {
 		
 		Commons.click(test,driver, By.xpath("//button[@id='createButton']")); 
-		Commons.click(test,driver, By.id("confirmmessagepopup")); 
-		
+		Commons.click(test,driver, By.id("confirmpopup")); 
+		Commons.click(test,driver, By.id("confirmmessagepopup"));
 		logger.info("Click create");
 	}
 	public static void createRes(ExtentTest test,WebDriver driver) throws IOException {

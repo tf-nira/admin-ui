@@ -175,7 +175,7 @@ public class DBManager extends BaseClass {
 						try {
 							;
 							statement.addBatch("delete from applicant_valid_document where cr_by ='"+BaseClass.userid+"'");
-							statement.addBatch("delete from appl_form_type  where cr_by ='"+BaseClass.userid+"'");
+						//	statement.addBatch("delete from appl_form_type  where cr_by ='"+BaseClass.userid+"'");
 							statement.addBatch("delete from biometric_attribute  where cr_by ='"+BaseClass.userid+"'");
 							statement.addBatch("delete from biometric_type  where cr_by ='"+BaseClass.userid+"'");
 							statement.addBatch("delete from blocklisted_words  where cr_by ='"+BaseClass.userid+"'");
