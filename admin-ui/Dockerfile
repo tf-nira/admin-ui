@@ -24,9 +24,9 @@ ARG artifactory_url
 ENV artifactory_url_env=${artifactory_url}
 
 # Docker Labels
-LABEL source=${SOURCE} \
-      commit_hash=${COMMIT_HASH} \
-      commit_id=${COMMIT_ID} \
+LABEL source=${SOURCE}
+      commit_hash=${COMMIT_HASH}
+      commit_id=${COMMIT_ID}
       build_time=${BUILD_TIME}
 
 # Install packages and create user
