@@ -18,7 +18,7 @@ on:
       - develop
       - release-*
       - master
-      - 1.*
+      - 1.* 
       - MOSIP*
       - tf_nira_dev
 
@@ -48,6 +48,10 @@ jobs:
       SERVICE_NAME: ${{ matrix.SERVICE_NAME }}
       NPM_BUILD: ${{ matrix.NPM_BUILD }}
       BUILD_ARTIFACT: ${{ matrix.BUILD_ARTIFACT }}
+      # Pass the commit metadata as build arguments
+      COMMIT_HASH: ${{ github.sha }}
+      COMMIT_ID: ${{ github.event.before }}
+      BUILD_TIME: ${{ steps.timestamp.outputs.date }} # You can set this value using a separate timestamp step
     secrets:
       DEV_NAMESPACE_DOCKER_HUB: ${{ secrets.DEV_NAMESPACE_DOCKER_HUB }}
       ACTOR_DOCKER_HUB: ${{ secrets.ACTOR_DOCKER_HUB }}
@@ -94,8 +98,8 @@ jobs:
         with:
           ref: ${{ github.ref }}
           java-version: 11
-          server-id: ossrh # Value of the distributionManagement/repository/id field of the pom.xml
-          settings-path: ${{ github.workspace }} # location for the settings.xml file
+          server-id: ossrh
+          settings-path: ${{ github.workspace }}
 
       - name: Cache local Maven repository
         uses: actions/cache@v3
@@ -106,18 +110,17 @@ jobs:
             ${{ runner.os }}-maven-
 
       - name: Setup the settings file for ossrh server
-        run: echo "<settings> <servers>  <server>  <id>ossrh</id>    <username>${{secrets.ossrh_user}}</username> <password>${{secrets.ossrh_secret}}</password> </server> </servers> <profiles> <profile>     <id>ossrh</id> <activation> <activeByDefault>true</activeByDefault> </activation>  <properties> <gpg.executable>gpg2</gpg.executable> <gpg.passphrase>${{secrets.gpg_secret}}</gpg.passphrase> </properties> </profile> <profile> <id>allow-snapshots</id>       <activation><activeByDefault>true</activeByDefault></activation> <repositories> <repository>        <id>snapshots-repo</id> <url>https://oss.sonatype.org/content/repositories/snapshots</url> <releases><enabled>false</enabled></releases> <snapshots><enabled>true</enabled></snapshots> </repository>  <repository>         <id>releases-repo</id>  <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>         <releases><enabled>true</enabled></releases>         <snapshots><enabled>false</enabled></snapshots> </repository> </repositories>  </profile> <profile> <id>sonar</id> <properties>  <sonar.sources>.</sonar.sources> <sonar.host.url>https://sonarcloud.io</sonar.host.url>  </properties> <activation> <activeByDefault>false</activeByDefault> </activation> </profile> </profiles> </settings>" > $GITHUB_WORKSPACE/settings.xml
+        run: |
+          echo "<settings> <servers> <server> <id>ossrh</id> <username>${{secrets.ossrh_user}}</username> <password>${{secrets.ossrh_secret}}</password> </server> </servers> <profiles> <profile> <id>ossrh</id> <activation> <activeByDefault>true</activeByDefault> </activation> <properties> <gpg.executable>gpg2</gpg.executable> <gpg.passphrase>${{secrets.gpg_secret}}</gpg.passphrase> </properties> </profile> </profiles> </settings>" > $GITHUB_WORKSPACE/settings.xml
 
       - name: Build residentuitests with Maven
         run: |
-          cd ${{ env.SERVICE_LOCATION}}
+          cd ${{ env.SERVICE_LOCATION }}
           mvn -U -B package -Dmaven.wagon.http.retryHandler.count=2 --file pom.xml -s $GITHUB_WORKSPACE/settings.xml
-
 
       - name: Ready the springboot artifacts
         if: ${{ !contains(github.ref, 'master') || !contains(github.ref, 'main') }}
         run: |
-          ## FIND JARS & COPY ONLY EXECUTABLE JARs STORED UNDER TARGET DIRECTORY 
           find ${{ env.SERVICE_LOCATION }} -path '*/target/*' -name '*.jar'  -type f -exec zip ${{ env.BUILD_ARTIFACT }}.zip {} +
 
       - name: Upload the springboot jars
@@ -130,11 +133,10 @@ jobs:
       - uses: 8398a7/action-slack@v3
         with:
           status: ${{ job.status }}
-          fields: repo,message,author,commit,workflow,job # selectable (default: repo,message)
+          fields: repo,message,author,commit,workflow,job
         env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
-        if: failure() # Pick up events even if the job fails or is canceled.
-
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        if: failure()
 
   build-docker-admintest:
     needs: build-admintest-local
