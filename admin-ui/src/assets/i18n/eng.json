@@ -499,7 +499,7 @@
             "btnTxt": "Ok"
         },
         "statuscheckFailed":"Failed",
-        "statuscheckProcessed":"Processe",
+        "statuscheckProcessed":"Processed",
         "statuscheckCompleted":"Completed"
         
     },
