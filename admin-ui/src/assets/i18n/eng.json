@@ -499,8 +499,9 @@
             "btnTxt": "Ok"
         },
         "statuscheckFailed":"Failed",
+        "statuscheckProcessed":"Processe",
         "statuscheckCompleted":"Completed"
-
+        
     },
     "packet-upload":{
       "header":"Packet Upload",
