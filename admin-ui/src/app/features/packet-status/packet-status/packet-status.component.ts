@@ -69,7 +69,7 @@ export class PacketStatusComponent implements OnInit {
        } else{          
           this.data = response['response']['packetStatusUpdateList'];
           for (let i = 0 ; i < this.data.length; i++) {
-            if (this.data[i].statusCode.includes('PROCESSED')) {
+            if (this.data[i].statusCode.includes('PROCESSED')) { 
               this.statusCheck = this.messages.statuscheckProcessed;
             }
             else if (this.data[i].statusCode.includes('FAILED')) {
@@ -77,9 +77,11 @@ export class PacketStatusComponent implements OnInit {
             } else {
               this.statusCheck = this.messages.statuscheckCompleted;
             }
+            console.log("status for ", this.data[i].transactionTypeCode, "is ", this.statusCheck)
             this.error = false;
             this.showDetails = true;
           }
+          console.log("Final status is ", this.statusCheck)
         }
       });
     }
