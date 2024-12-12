@@ -393,8 +393,17 @@ export class CreateComponent {
     this.dataStorageService
     .getImmediateChildren(locationCode, this.primaryLang)
     .subscribe(response => {
-      if(response['response'])
-        self.dynamicDropDown[fieldName] = response['response']['locations'];
+      if(fieldName!=appConstants.Village && fieldName!=appConstants.PollingStation){
+        if(response['response'])
+          self.dynamicDropDown[fieldName] = response['response']['locations'];
+      }
+      else{
+        const locations = response['response']['locations'];
+        const villages = locations.filter(location => location.hierarchyName === appConstants.Village);
+        const pollingStations = locations.filter(location => location.hierarchyName === appConstants.PollingStation);
+        this.dynamicDropDown[appConstants.Village] = villages;
+        this.dynamicDropDown[appConstants.PollingStation] = pollingStations;
+      }
     });
   }
 
