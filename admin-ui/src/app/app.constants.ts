@@ -179,6 +179,9 @@ export const registrationCenterCreateId = 'string';
 export const registrationDeviceCreateId = 'string';
 export const registrationMachineCreateId = 'string';
 
+export const Village = 'Village';
+export const PollingStation = `PollingStation`;
+
 export const viewFields = [];
 
 export const masterdataMapping = {
