@@ -71,6 +71,8 @@ export class PacketStatusComponent implements OnInit {
           for (let i = 0 ; i < this.data.length; i++) {
            if (this.data[i].statusCode.includes('FAILED')) {
               this.statusCheck = this.messages.statuscheckFailed;
+            } else if(this.data[i].statusCode.includes('IN_PROGRESS')) {
+              this.statusCheck = this.messages.statuscheckProcessed;
             } else {
               this.statusCheck = this.messages.statuscheckCompleted;
             }
