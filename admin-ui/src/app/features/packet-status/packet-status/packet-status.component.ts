@@ -71,12 +71,14 @@ export class PacketStatusComponent implements OnInit {
           for (let i = 0 ; i < this.data.length; i++) {
            if (this.data[i].statusCode.includes('FAILED')) {
               this.statusCheck = this.messages.statuscheckFailed;
-            } else if(this.data[i].statusCode.includes('IN_PROGRESS')) {
-              this.statusCheck = this.messages.statuscheckProcessed;
-            } else {
+            } else if(this.data[i].statusCode.includes('REJECTED')) {
+              this.statusCheck = this.messages.statuscheckRejected;
+            } else if(this.data[i].statusCode.includes('COMPLETED') || this.data[i].statusCode.includes('PROCESSED')) {
               this.statusCheck = this.messages.statuscheckCompleted;
+            } else {
+              this.statusCheck = this.messages.statuscheckInProgress;
             }
-            console.log("status for ", this.data[i].transactionTypeCode, "is ", this.statusCheck)
+            console.log("status for ", this.data[i].transactionTypeCode, "is ", this.statusCheck);
             this.error = false;
             this.showDetails = true;
           }
