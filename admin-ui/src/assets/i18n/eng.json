@@ -500,7 +500,9 @@
         },
         "statuscheckFailed":"Failed",
         "statuscheckProcessed":"Processed",
-        "statuscheckCompleted":"Completed"
+        "statuscheckInProgress":"In Progress",
+        "statuscheckCompleted":"Completed",
+        "statuscheckRejected":"Rejected"
         
     },
     "packet-upload":{
@@ -544,7 +546,7 @@
      
         },
         "source":[{"label":"Registration Client","value":"REGISTRATION_CLIENT"}],
-        "process":[{"label":"New","value":"NEW"},{"label":"Change of Particulars","value":"UPDATE"},{"label":"Renewal","value":"RENEWAL"},{"label":"Lost","value":"LOST"},{"label":"Biometrics Correction","value":"BIOMETRIC_CORRECTION"}],
+        "process":[{"label":"New","value":"NEW"},{"label":"Change of Particulars","value":"UPDATE"},{"label":"Renewal","value":"RENEWAL"},{"label":"Lost","value":"LOST"},{"label":"FirstID","value":"FIRSTID"},{"label":"Biometrics Correction","value":"BIOMETRIC_CORRECTION"}],
         "supervisorStatus":[{"label":"Approved","value":"APPROVED"},{"label":"Rejected","value":"REJECTED"}]
       }
     },
@@ -1371,6 +1373,8 @@
         "RPR-BAU-SUCCESS-001": "Biometric Authentication is Successful",
         "RPR-DDP-SUCCESS-001": "Demo Dedupe is Successful",
         "RPR-DDP-FAILED-001": "Demo Dedupe is Successful",
+        "RPR-MVS-FAILED-002":"MVS has failed",
+        "RPR-MVS-SUCCESS-001":"MVS is Successful",
         "RPR-DDP-FAILED-002": "Potential Demo Match was Found",
         "RPR-MNV-SUCCESS-001": "Match Not Found by Manual Verifier",
         "RPR-MNV-FAILED-001": "Match Found by Manual Verifier",
