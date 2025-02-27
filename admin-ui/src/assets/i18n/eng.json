@@ -1367,7 +1367,7 @@
         "RPR-BDP-SUCCESS-002": "Biometric Deduplication is Successful",
         "RPR-BDP-FAILED-001": "Potential Biometric Match Found while Processing Packet",
         "RPR-BDP-FAILED-002": "No Match was Found for the Biometrics Received",
-        "RPR-BDP-SUCCESS-003": "No Match was Found for the Biometrics Received",
+        "RPR-BDP-SUCCESS-003": "Unique Match was Found for the Biometrics Received",
         "RPR-BDP-FAILED-003": "Multiple Match was Found for the Biometrics Received",
         "RPR-BAU-FAILED-001": "Biometric Authentication has Failed",
         "RPR-BAU-SUCCESS-001": "Biometric Authentication is Successful",
