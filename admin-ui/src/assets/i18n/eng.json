@@ -1425,6 +1425,8 @@
         "RPR-PKV-FAILED-014": "Exception occurred in packet manager",
         "RPR-PKV-FAILED-015": "XSD validation failed",
         "RPR-PKV-FAILED-016": "Biometric Signature validation failed",
+        "RPR-PKV-FAILED-022": "Applicant existing userServiceType is not eligible for requested change",
+        "RPR-PKV-FAILED-023": "Applicant is not eligible to Renewal service",
         "RPR-PKV-FAILED-017": "Consent is not agreed for the packet to process further",
         "RPR-PKC-SUCCESS-001": "Packet Classification is Successful",
         "RPR-CMD-SUCCESS-001": "CMD Validation is Successful",
