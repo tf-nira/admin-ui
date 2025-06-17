@@ -67,7 +67,15 @@ export class PacketStatusComponent implements OnInit {
           this.statusCheck = '';
           this.errorMessage = this.serverMessage[response['errors'][0].errorCode];
        } else{          
-          this.data = response['response']['packetStatusUpdateList'];
+          //this.data = response['response']['packetStatusUpdateList'];
+          let allData = response['response']['packetStatusUpdateList'];
+          let processedIndex = allData.findIndex(item => item.statusCode === 'PROCESSED' || item.statusCode === 'COMPLETED');
+          if (processedIndex !== -1) {
+            this.data = allData.slice(0, processedIndex + 1);
+          } else {
+            this.data = allData;
+          }
+
           let i = this.data.length - 1;
           if (this.data[i].statusCode.includes('FAILED')) {
             this.statusCheck = this.messages.statuscheckFailed;
