@@ -69,7 +69,8 @@ export class PacketStatusComponent implements OnInit {
        } else{          
           //this.data = response['response']['packetStatusUpdateList'];
           let allData = response['response']['packetStatusUpdateList'];
-          let processedIndex = allData.findIndex(item => item.statusCode === 'PROCESSED' || item.statusCode === 'COMPLETED');
+          let processedIndex = allData.findIndex(item => item.transactionTypeCode === 'INTERNAL_WORKFLOW_ACTION' &&
+            (item.statusCode === 'PROCESSED' || item.statusCode === 'COMPLETED'));
           if (processedIndex !== -1) {
             this.data = allData.slice(0, processedIndex + 1);
           } else {
