@@ -81,7 +81,8 @@ export class LostRidStatusComponent implements OnInit {
     this.initialLocationCode = this.appService.getConfig()['countryCode'];
     this.locCode = this.appService.getConfig()['locationHierarchyLevel'];
     //this.getLocationHierarchyLevels();  
-    this.getlocationDetails();
+    // this.getlocationDetails();
+    this.getCenterDetails(null);
     this.translateService
       .getTranslation(this.primaryLang)
       .subscribe(response => {
@@ -171,8 +172,8 @@ export class LostRidStatusComponent implements OnInit {
 
   getCenterDetails(locCode) {    
     const filterObject = new FilterValuesModel('name', 'unique', '');
-    let optinalFilterObject = [{"columnName":"locationCode","type":"equals","value":locCode}];
-    let filterRequest = new FilterRequest([filterObject], this.primaryLang, optinalFilterObject);
+    // let optinalFilterObject = [{"columnName":"locationCode","type":"equals","value":locCode}];
+    let filterRequest = new FilterRequest([filterObject], this.primaryLang, []);
     let request = new RequestModel('', null, filterRequest);
     this.dataStroageService
       .getFiltersForAllMaterDataTypes('registrationcenters', request)

@@ -35,7 +35,7 @@
       </div>
       <span><h3 class="header">{{'lostRID.subtitlelocation' | translate}}</h3></span>
       <div *ngFor="let field of filterColumns; let i = index" style="display:inline-flex;">
-        <mat-form-field *ngIf="field.dropdown === 'true' && field.datePicker !== 'true' && dynamicDropDown[field.filtername] && field.filtername!=='centerId'" style="padding: 10px;width: 255px;">
+        <!-- <mat-form-field *ngIf="field.dropdown === 'true' && field.datePicker !== 'true' && dynamicDropDown[field.filtername] && field.filtername!=='centerId'" style="padding: 10px;width: 255px;">
           <mat-select 
             id="{{field.filtername}}"
             required={{field.ismandatory}}
@@ -47,7 +47,7 @@
               {{ data.fieldValue }}
             </mat-option>
           </mat-select>
-        </mat-form-field>
+        </mat-form-field> -->
         <mat-form-field *ngIf="field.dropdown === 'true' && field.datePicker !== 'true' && field.filtername==='centerId'" style="padding: 10px;width: 255px;">
           <mat-select 
             id="{{field.filtername}}"
