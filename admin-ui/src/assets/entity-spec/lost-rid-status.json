@@ -148,7 +148,7 @@
       "apiName": "locations",
       "fieldName": "locationCode",
       "methodCallName": "",
-      "ismandatory": "true"
+      "ismandatory": "false"
     },
     {
       "filtername": "centerId",
