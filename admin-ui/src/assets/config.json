@@ -1,10 +1,21 @@
 {
+    "baseUrl": "https://api-internal.niraqa.idencode.link/v1/",
+    "proxyUrl" : "https://cors-anywhere.herokuapp.com/",
+    "adminUrl": "/",
     "primaryLangCode": "eng",
-    "secondaryLangCode": "ara",
-    "baseUrl": "https://dev.mosip.net/v1/",
-    "adminUrl":"/admin-ui/",
-    "templateRepoUrl":"/admin-ui/templates/",
-    "validateToken": "admin/authorize/admin/validateToken",
+    "secondaryLangCode": "fra",
+    "validateToken": "authmanager/authorize/admin/validateToken",
     "login": "admin/login/",
-    "logout": "admin/logout/user"
-} 
+    "logout": "admin/logout/user",
+    "templateRepoUrl": "/templates/",
+    "supportedLanguages": " eng,",
+        "leftToRightOrientation": "eng",
+        "filterValueMaxCount": "{\"default\":20,\"registrationcenters\":500,\"locations\":300}",
+        "countryCode": "UGA",
+        "locationHierarchyLevel": "5",
+        "rightToLeftOrientation": "ara",
+        "version": "LTS",
+        "optionalLanguages": "",
+        "filterValueMaxRecords": "20",
+        "mandatoryLanguages": "eng"
+}
