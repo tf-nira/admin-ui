@@ -21,6 +21,7 @@ on:
       - 1.*
       - MOSIP*
       - tf_nira_dev
+      - jagaPatch
 
 jobs:
   build-admin-ui:
