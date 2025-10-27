@@ -349,6 +349,13 @@ export class DataStorageService {
     return this.http.get(this.BASE_URL + 'admin/packetstatusupdate', {params});
   }
 
+  resumePacketProcess(data: FormData) {
+    return this.http.post(
+      this.BASE_URL  + 'admin'  + '/packetstatusupdate/resumePacket',
+      data
+    );
+  }
+
   getCreateUpdateSteps(entity: string) {
   return this.http.get(`./assets/create-update-steps/${entity}-steps.json`);
   }

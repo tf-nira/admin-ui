@@ -493,6 +493,7 @@
         "status": "Status",
         "viewMore": "View More",
         "viewLess": "View Less",
+        "resume": "Resume",
         "errorMessages": {
             "title": "Error",
             "message": "RID Not Found",

@@ -96,7 +96,31 @@ export class PacketStatusComponent implements OnInit {
     }
   }
 
-viewMore() {
+  viewMore() {
     this.showTimeline = !this.showTimeline;
   }
+
+  resume() {
+  if (!this.id || !this.data || this.data.length === 0) {
+    this.error = true;
+    this.errorMessage = 'Invalid packet data';
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append('rid', this.id);
+  formData.append('langCode', this.headerService.getUserPreferredLanguage());
+
+  this.dataStorageService.resumePacketProcess(formData).subscribe({
+    next: (response) => {
+      console.log('Resume API Response:', response);
+      this.error = false;
+    },
+    error: (error) => {
+      console.error('Resume API Error:', error);
+      this.error = true;
+    }
+  });
+}
+
 }
