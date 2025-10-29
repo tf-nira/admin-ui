@@ -7,6 +7,9 @@
             <input matInput placeholder="{{'packet-status.input-text' | translate}}" [(ngModel)]="id"/>
         </mat-form-field>
         <img src="./assets/images/search.png" (click)="search()" alt="search" class="packet-status__image-placer" height="20px" width="20px">
+        <button mat-raised-button (click)="resume()" *ngIf="id && data && showDetails" style="margin-left: 50px; background-color: #FF4081; color: white;  height: 30px; width: 80px;">
+            {{ 'packet-status.resume' | translate }}
+        </button>
         <mat-error style="margin-left: 30px ;font-size: 9.5px" *ngIf="error">{{errorMessage | translate}}</mat-error>
     </mat-card>
     <mat-card *ngIf="showDetails" style="border-radius: 0;">
@@ -66,4 +69,18 @@
             </div>
         </div>
     </mat-card>
+</div>
+<div class="popup-overlay" *ngIf="popupVisible">
+  <div class="popup-box">
+    <div class="popup-header">
+      <img *ngIf="popupType === 'success'" src="assets/images/icon_Suceess right.png"
+        alt="Success Icon" class="popup-icon"/>
+      <h3 *ngIf="popupType === 'success'" class="popup-title">{{ popupTitle }}</h3>
+      <h3 *ngIf="popupType === 'error'" class="popup-error-title">{{ popupTitle }}</h3>
+    </div>
+    <div class="popup-body"><p>{{ popupMessage }}</p></div>
+    <div class="popup-footer">
+      <button class="popup-close-btn" (click)="closePopup()">{{ popupButtonText }}</button>
+    </div>
+  </div>
 </div>
