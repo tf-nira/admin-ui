@@ -106,9 +106,9 @@ export class PacketStatusComponent implements OnInit {
   }
 
   resume() {
-    if (!this.id || !this.data || this.data.length === 0) {
+    if (!this.id) {
       this.error = true;
-      this.errorMessage = 'Invalid packet data';
+      this.errorMessage = 'Invalid packet id';
       return;
     }
 
