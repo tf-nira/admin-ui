@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { AppConfigService } from 'src/app/app-config.service';
 import { AuditService } from 'src/app/core/services/audit.service';
+import * as appConstants from '../../../app.constants';
 import { DataStorageService } from 'src/app/core/services/data-storage.service';
 import { MatDialog } from '@angular/material/dialog';
 import { HeaderService } from 'src/app/core/services/header.service';
@@ -27,7 +28,11 @@ export class PacketStatusComponent implements OnInit {
   statusCheck: string;
   serverMessage:any;
   languageCode:any;
-
+  popupVisible = false;
+  popupMessage = '';
+  popupTitle = '';
+  popupButtonText = 'Done';
+  popupType: 'success' | 'error' = 'error';
   id = '';
   error = false;
   errorMessage = '';
@@ -101,26 +106,39 @@ export class PacketStatusComponent implements OnInit {
   }
 
   resume() {
-  if (!this.id || !this.data || this.data.length === 0) {
-    this.error = true;
-    this.errorMessage = 'Invalid packet data';
-    return;
+    if (!this.id || !this.data || this.data.length === 0) {
+      this.error = true;
+      this.errorMessage = 'Invalid packet data';
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('rid', this.id);
+    formData.append('langCode', this.headerService.getUserPreferredLanguage());
+
+    this.dataStorageService.resumePacketProcess(formData).subscribe({
+      next: (response) => {
+        console.log('Resume API Response:', response);
+        this.error = false;
+        const res: any = response;
+        if (res && res.response && res.response.message && res.response.message == appConstants.Success) {
+          this.showPopup('Success', 'Packet Resumed Successfully', 'Close', 'success');
+        } else {
+          this.showPopup('Error', res.response.message, 'Close', 'error');
+        }
+      }
+    });
   }
 
-  const formData = new FormData();
-  formData.append('rid', this.id);
-  formData.append('langCode', this.headerService.getUserPreferredLanguage());
+  showPopup(title: string, message: string, buttonText: string, type: 'success' | 'error') {
+    this.popupTitle = title;
+    this.popupMessage = message;
+    this.popupButtonText = buttonText;
+    this.popupType = type;
+    this.popupVisible = true;
+  }
 
-  this.dataStorageService.resumePacketProcess(formData).subscribe({
-    next: (response) => {
-      console.log('Resume API Response:', response);
-      this.error = false;
-    },
-    error: (error) => {
-      console.error('Resume API Error:', error);
-      this.error = true;
-    }
-  });
-}
-
+  closePopup() {
+    this.popupVisible = false;
+  }
 }

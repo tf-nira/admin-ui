@@ -181,7 +181,7 @@ export const registrationMachineCreateId = 'string';
 
 export const Village = 'Village';
 export const PollingStation = `PollingStation`;
-
+export const Success = 'Successfully updated';
 export const viewFields = [];
 
 export const masterdataMapping = {
