@@ -1,10 +1,11 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { DataStorageService } from 'src/app/core/services/data-storage.service';
 import * as appConstants from '../../../app.constants';
 import { AppConfigService } from 'src/app/app-config.service';
 import { HeaderModel } from 'src/app/core/models/header.model';
 import { CenterRequest } from 'src/app/core/models/centerRequest.model';
+import { Observable } from 'rxjs';
 import { FilterModel } from 'src/app/core/models/filter.model';
 import { RequestModel } from 'src/app/core/models/request.model';
 import { MatDialog } from '@angular/material';
@@ -14,6 +15,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { AuditService } from 'src/app/core/services/audit.service';
 import { HeaderService } from "src/app/core/services/header.service";
 import defaultJson from "../../../../assets/i18n/default.json";
+import { MaterDataCommonViewComponent } from '../shared/mater-data-common-view/mater-data-common-view.component';
 
 @Component({
   selector: 'app-single-view',
@@ -41,6 +43,7 @@ export class SingleViewComponent implements OnDestroy {
   fullTranslations: any;
   showSecondaryForm: boolean;
   noRecordFound = false;
+  @ViewChild(MaterDataCommonViewComponent, { static: false }) commonView: MaterDataCommonViewComponent;
 
   constructor(
     public activatedRoute: ActivatedRoute,
@@ -245,33 +248,31 @@ export class SingleViewComponent implements OnDestroy {
     this.subscribed.unsubscribe();
   }
 
-  // Show confirmation dialog on navigating away from create/single-view pages with unsaved data
-  canDeactivate(): Promise<any> | boolean {
-    
-    const urlParts = this.router.url.split('/');
-    const action = urlParts[4];  // 'create' | 'single-view' | ...
-
-    // If not on editable screens, allow navigation
-    if (!(action === 'create' || action === 'single-view')) {
+  canDeactivate(): Observable<any> | boolean {
+    // allow programmatic navigation after successful save/update
+    const w: any = window as any;
+    if (w.mdSaving) {
+      w.mdSaving = false;
       return true;
     }
-
-    const navPopup = this.popupMessages && this.popupMessages['navigation-popup'] ? this.popupMessages['navigation-popup'] : {};
-
-    return new Promise((resolve) => {
-      this.dialog
+    const body = this.commonView && this.commonView.bodyComponent ? this.commonView.bodyComponent : null;
+    const hasUnsaved = !!(body && body.hasUnsavedChanges);
+    const hasDirtyControls = !!document.querySelector('form .ng-dirty');
+    if (hasUnsaved || hasDirtyControls) {
+      return this.dialog
         .open(DialogComponent, {
           width: '650px',
           data: {
             case: 'CONFIRMATION',
-            title: navPopup.title,
-            message: navPopup.message,
-            yesBtnTxt: navPopup.yesBtnTxt,
-            noBtnTxt: navPopup.noBtnTxt
+            title: this.popupMessages['navigation-popup'].title,
+            message: this.popupMessages['navigation-popup'].message,
+            yesBtnTxt: this.popupMessages['navigation-popup'].yesBtnTxt,
+            noBtnTxt: this.popupMessages['navigation-popup'].noBtnTxt
           }
         })
-        .afterClosed()
-        .subscribe(result => resolve(result));
-    });
+        .afterClosed();
+    } else {
+      return true;
+    }
   }
 }

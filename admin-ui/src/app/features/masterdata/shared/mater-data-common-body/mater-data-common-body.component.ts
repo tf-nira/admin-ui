@@ -87,6 +87,7 @@ export class MaterDataCommonBodyComponent implements OnInit {
   isPrimaryLangRTL:boolean = false;
   searchResult:any;
   appConfig:any;
+  hasUnsavedChanges: boolean = false;
 
   constructor(
     private location: Location,
@@ -712,6 +713,7 @@ export class MaterDataCommonBodyComponent implements OnInit {
   }
 
   captureValue(event: any, formControlName: string, type: string) {
+    this.hasUnsavedChanges = true;
     if (type === 'primary') {
       this.primaryData[formControlName] = event.target.value;
     } else if (type === 'secondary') {
@@ -720,6 +722,7 @@ export class MaterDataCommonBodyComponent implements OnInit {
   }
 
   captureDatePickerValue(event: any, formControlName: string, type: string) {
+    this.hasUnsavedChanges = true;
     let dateFormat = new Date(event.target.value);
     let formattedDate = dateFormat.getFullYear() + "-" + ("0"+(dateFormat.getMonth()+1)).slice(-2) + "-" + ("0" + dateFormat.getDate()).slice(-2);
     if (type === 'primary') {
@@ -732,7 +735,7 @@ export class MaterDataCommonBodyComponent implements OnInit {
   }
 
   captureDropDownValue(event: any, formControlName: string, type: string) {
-    
+    this.hasUnsavedChanges = true;
     if (event.source.selected) {
       if(formControlName === "moduleId" && type === "primary")
         this.primaryData["moduleName"] = event.source.viewValue;
@@ -745,6 +748,7 @@ export class MaterDataCommonBodyComponent implements OnInit {
   }
 
   captureLocationDropDownValue(event: any, formControlName: string, type: string) {    
+    this.hasUnsavedChanges = true;
     if (event.source.selected) {
       this.primaryData[formControlName] = event.source.value;
       this.secondaryData[formControlName] = event.source.value; 
@@ -753,6 +757,7 @@ export class MaterDataCommonBodyComponent implements OnInit {
   }
 
   captureLocationSecondaryDropDownValue(event: any, formControlName: string, type: string) {
+    this.hasUnsavedChanges = true;
     if (event.source.value) {
       this.secondaryData["hierarchyName"] = event.source.viewValue; 
     }
@@ -851,11 +856,13 @@ export class MaterDataCommonBodyComponent implements OnInit {
                       this.showMessage(url)
                         .afterClosed()
                         .subscribe(() => {
+                          (window as any)['mdSaving'] = true;
                           if(this.router.url.split('/')[3] === "dynamicfields"){
                             this.router.navigateByUrl(
                               `admin/masterdata/${this.masterdataType}/`+request.request["name"]+`/view`
                             );
                           }else{
+                            (window as any)['mdSaving'] = true;
                             this.router.navigateByUrl(
                               `admin/masterdata/${this.masterdataType}/view`
                             );
@@ -898,11 +905,13 @@ export class MaterDataCommonBodyComponent implements OnInit {
                     this.showMessage(url)
                       .afterClosed()
                       .subscribe(() => {
+                        (window as any)['mdSaving'] = true;
                         if(this.router.url.split('/')[3] === "dynamicfields"){
                           this.router.navigateByUrl(
                             `admin/masterdata/${this.masterdataType}/`+request.request["name"]+`/view`
                           );
                         }else{
+                          (window as any)['mdSaving'] = true;
                           this.router.navigateByUrl(
                             `admin/masterdata/${this.masterdataType}/view`
                           );
@@ -931,11 +940,13 @@ export class MaterDataCommonBodyComponent implements OnInit {
               this.showMessage(url)
                 .afterClosed()
                 .subscribe(() => {
+                  (window as any)['mdSaving'] = true;
                   if(this.router.url.split('/')[3] === "dynamicfields"){
                     this.router.navigateByUrl(
                       `admin/masterdata/${this.masterdataType}/`+request.request["name"]+`/view`
                     );
                   }else{
+                    (window as any)['mdSaving'] = true;
                     this.router.navigateByUrl(
                       `admin/masterdata/${this.masterdataType}/view`
                     );
@@ -1020,11 +1031,13 @@ export class MaterDataCommonBodyComponent implements OnInit {
                     this.showMessage(url)
                       .afterClosed()
                       .subscribe(() => {
+                        (window as any)['mdSaving'] = true;
                         if(this.router.url.split('/')[3] === "dynamicfields"){
                           this.router.navigateByUrl(
                             `admin/masterdata/${this.masterdataType}/`+request.request["name"]+`/view`
                           );
                         }else{
+                          (window as any)['mdSaving'] = true;
                           this.router.navigateByUrl(
                             `admin/masterdata/${this.masterdataType}/view`
                           );
@@ -1053,11 +1066,13 @@ export class MaterDataCommonBodyComponent implements OnInit {
                     this.showMessage(url)
                       .afterClosed()
                       .subscribe(() => {
+                        (window as any)['mdSaving'] = true;
                         if(this.router.url.split('/')[3] === "dynamicfields"){
                           this.router.navigateByUrl(
                             `admin/masterdata/${this.masterdataType}/`+request.request["name"]+`/view`
                           );
                         }else{
+                          (window as any)['mdSaving'] = true;
                           this.router.navigateByUrl(
                             `admin/masterdata/${this.masterdataType}/view`
                           );
@@ -1086,11 +1101,13 @@ export class MaterDataCommonBodyComponent implements OnInit {
                 this.showMessage(url)
                   .afterClosed()
                   .subscribe(() => {
+                    (window as any)['mdSaving'] = true;
                     if(this.router.url.split('/')[3] === "dynamicfields"){
                       this.router.navigateByUrl(
                         `admin/masterdata/${this.masterdataType}/`+request.request["name"]+`/view`
                       );
                     }else{
+                      (window as any)['mdSaving'] = true;
                       this.router.navigateByUrl(
                         `admin/masterdata/${this.masterdataType}/view`
                       );
