@@ -256,14 +256,7 @@ export class SingleViewComponent implements OnDestroy {
       return true;
     }
 
-    const translations: any = this.fullTranslations;
-    const center = translations && translations.center ? translations.center : null;
-    const popupMessages = center && center.popupMessages ? center.popupMessages : null;
-    const navPopup = popupMessages && popupMessages['navigation-popup'] ? popupMessages['navigation-popup'] : null;
-    const title = navPopup && navPopup.title ? navPopup.title : 'Confirmation';
-    const message = navPopup && navPopup.message ? navPopup.message : 'Are you sure you want to navigate away from this page? Any unsaved data will be lost.';
-    const yesBtnTxt = navPopup && navPopup.yesBtnTxt ? navPopup.yesBtnTxt : 'Leave';
-    const noBtnTxt = navPopup && navPopup.noBtnTxt ? navPopup.noBtnTxt : 'Stay';
+    const navPopup = this.popupMessages && this.popupMessages['navigation-popup'] ? this.popupMessages['navigation-popup'] : {};
 
     return new Promise((resolve) => {
       this.dialog
@@ -271,10 +264,10 @@ export class SingleViewComponent implements OnDestroy {
           width: '650px',
           data: {
             case: 'CONFIRMATION',
-            title,
-            message,
-            yesBtnTxt,
-            noBtnTxt
+            title: navPopup.title,
+            message: navPopup.message,
+            yesBtnTxt: navPopup.yesBtnTxt,
+            noBtnTxt: navPopup.noBtnTxt
           }
         })
         .afterClosed()

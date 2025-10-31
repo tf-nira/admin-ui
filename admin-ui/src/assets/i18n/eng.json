@@ -224,8 +224,14 @@
             "A technical error has occurred"
         ],
         "buttonText": "OK",
-        "title": "Error"
-    }, 
+        "title": "Error",
+        "navigation-popup": {
+            "title": "Confirmation",
+            "message": "Are you sure you want to navigate away from this page? Any unsaved data will be lost.",
+            "yesBtnTxt": "Leave",
+            "noBtnTxt": "Stay"
+        }
+    },
     "masterData": {
         "master-data": "Master Data",
         "total-no": "Total No",
