@@ -38,6 +38,7 @@ export class SingleViewComponent implements OnDestroy {
   data = [];
 
   popupMessages = [];
+  fullTranslations: any;
   showSecondaryForm: boolean;
   noRecordFound = false;
 
@@ -68,7 +69,10 @@ export class SingleViewComponent implements OnDestroy {
     this.translate.use(this.headerService.getUserPreferredLanguage());
     this.translate
       .getTranslation(this.headerService.getUserPreferredLanguage())
-      .subscribe(response => (this.popupMessages = response.singleView));
+      .subscribe(response => {
+        this.popupMessages = response.singleView;
+        this.fullTranslations = response;
+      });
     this.activatedRoute.params.subscribe(response => {
       this.id = response.id;
       this.masterdataType = response.type;
@@ -239,5 +243,42 @@ export class SingleViewComponent implements OnDestroy {
 
   ngOnDestroy() {
     this.subscribed.unsubscribe();
+  }
+
+  // Show confirmation dialog on navigating away from create/single-view pages with unsaved data
+  canDeactivate(): Promise<any> | boolean {
+    
+    const urlParts = this.router.url.split('/');
+    const action = urlParts[4];  // 'create' | 'single-view' | ...
+
+    // If not on editable screens, allow navigation
+    if (!(action === 'create' || action === 'single-view')) {
+      return true;
+    }
+
+    const translations: any = this.fullTranslations;
+    const center = translations && translations.center ? translations.center : null;
+    const popupMessages = center && center.popupMessages ? center.popupMessages : null;
+    const navPopup = popupMessages && popupMessages['navigation-popup'] ? popupMessages['navigation-popup'] : null;
+    const title = navPopup && navPopup.title ? navPopup.title : 'Confirmation';
+    const message = navPopup && navPopup.message ? navPopup.message : 'Are you sure you want to navigate away from this page? Any unsaved data will be lost.';
+    const yesBtnTxt = navPopup && navPopup.yesBtnTxt ? navPopup.yesBtnTxt : 'Leave';
+    const noBtnTxt = navPopup && navPopup.noBtnTxt ? navPopup.noBtnTxt : 'Stay';
+
+    return new Promise((resolve) => {
+      this.dialog
+        .open(DialogComponent, {
+          width: '650px',
+          data: {
+            case: 'CONFIRMATION',
+            title,
+            message,
+            yesBtnTxt,
+            noBtnTxt
+          }
+        })
+        .afterClosed()
+        .subscribe(result => resolve(result));
+    });
   }
 }
