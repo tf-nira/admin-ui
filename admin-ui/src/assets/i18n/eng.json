@@ -245,7 +245,13 @@
         "unmapped-documents": "Unmapped Documents",
         "masterDataTypes": "Masterdata Types",
         "dynamicField": "Dynamic Field",
-        "createDynamicField": "Create New Dynamic Field"
+        "createDynamicField": "Create New Dynamic Field",
+        "create": {
+            "title": "Confirmation",
+            "message": "You are about to create a Center Type. Please ensure that all the information is correct.",
+            "yesBtnText": "Confirm",
+            "noBtnText": "Cancel"
+        }
     },
     "masterdataupload": {
         "title": "Master Data Upload"
