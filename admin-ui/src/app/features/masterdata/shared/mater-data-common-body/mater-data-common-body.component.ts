@@ -34,6 +34,7 @@ import defaultJson from "../../../../../assets/i18n/default.json";
 import { HeaderService } from 'src/app/core/services/header.service';
 import { TranslateService } from '@ngx-translate/core';
 import { AuditService } from 'src/app/core/services/audit.service';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Component({
   selector: 'app-mater-data-common-body',
@@ -785,6 +786,19 @@ export class MaterDataCommonBodyComponent implements OnInit {
       }
     }
   }
+  confirmBeforeSave(): Observable<boolean> {
+  const dialogRef = this.dialog.open(DialogComponent, {
+    width: '650px',
+    data: {
+      case: 'CONFIRMATION',
+      title: this.popupMessages.masterData.create.title,
+      message: this.popupMessages.masterData.create.message,
+      yesBtnTxt: this.popupMessages.masterData.create.yesBtnText,
+      noBtnTxt: this.popupMessages.masterData.create.noBtnText
+    }
+  });
+    return dialogRef.afterClosed();
+  }
 
   executeAPI(){    
     let url = this.router.url.split('/')[3];
@@ -835,6 +849,8 @@ export class MaterDataCommonBodyComponent implements OnInit {
         null,
         this.primaryData
       );
+      this.confirmBeforeSave().subscribe(confirmed => {
+      if (!confirmed) return;
       this.dataStorageService.createMasterData(request).subscribe(updateResponse => {
           if (!updateResponse.errors) {
             if(textToValidate){       
@@ -968,7 +984,7 @@ export class MaterDataCommonBodyComponent implements OnInit {
             }
             this.showErrorPopup(message);
           }
-      });
+      });});
     }else{
       if(this.primaryData){
         delete this.primaryData['createdBy'];
