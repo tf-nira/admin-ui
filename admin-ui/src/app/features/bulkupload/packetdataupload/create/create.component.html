@@ -19,7 +19,7 @@
              <mat-form-field>
               <mat-label>{{'packet-upload.createView.center' | translate}}</mat-label>
               <mat-select formControlName="centerId" id="centerId">
-                <input placeholder="Search..." matInput type="text" (keyup)="onCenterKey($event.target.value)" class="example-input">
+                <input placeholder="Search..." matInput type="text" (keyup)="onKey($event.target.value)" class="example-input">
                 <mat-option
                   *ngFor="let data of dynamicDropDown['centerList']"
                   (onSelectionChange)="captureDropDownValue($event, 'centerId')" 
