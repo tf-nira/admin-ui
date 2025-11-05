@@ -35,6 +35,7 @@ export class CreateComponent {
   buttonalignment = 'ltr';
   serverError:any;
   dynamicDropDown = {};
+  centerList: any[] = [];
 
   constructor(
   private bulkuploadService: BulkuploadService,
@@ -95,8 +96,10 @@ export class CreateComponent {
       .getFiltersForAllMaterDataTypes('registrationcenters', request)
       .subscribe(response => {
         if(!response.errors){
-          this.dynamicDropDown["centerList"] = response.response.filters;
+          this.centerList = response.response.filters;
+          this.dynamicDropDown["centerList"] = [...this.centerList];
         }else{
+          this.centerList = [];
           this.dynamicDropDown["centerList"] = [];
         }
       });        
@@ -112,6 +115,21 @@ export class CreateComponent {
       document.getElementById("fileName").classList.remove('addredborder');
       this.fileNameError = false;
     }
+  }
+
+  onKey(value: string) {
+  const search = value.trim().toLowerCase();
+
+    if (!search) {
+      this.dynamicDropDown['centerList'] = [...this.centerList];
+    } else {
+      this.dynamicDropDown['centerList'] = this.centerList.filter(center =>
+        center.fieldValue.toLowerCase().includes(search) ||
+        center.fieldCode.toLowerCase().includes(search)
+      );
+    }
+
+    this.dynamicDropDown = { ...this.dynamicDropDown };
   }
 
   captureDropDownValue(event: any, formControlName: string) {    
