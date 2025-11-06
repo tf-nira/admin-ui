@@ -124,32 +124,32 @@ export class ListViewComponent implements OnDestroy {
 
   getSortColumn(event: SortModel) {
     console.log(event);
-    this.sortFilter.forEach(element => {
-      if (element.sortField === event.sortField) {
-        const index = this.sortFilter.indexOf(element);
-        this.sortFilter.splice(index, 1);
-      }
-    });
+    this.sortFilter = [];
+  
     if (event.sortType != null) {
       this.sortFilter.push(event);
     }
-    console.log(this.sortFilter);
+  
+    console.log('Updated sortFilter:', this.sortFilter);
     const filters = Utils.convertFilter(
       this.activatedRoute.snapshot.queryParams,
       this.appService.getConfig().primaryLangCode
     );
     filters.sort = this.sortFilter;
     const url = Utils.convertFilterToUrl(filters);
-    if(this.activatedRoute.snapshot.params.dynamicfieldtype){
+  
+    // Re-navigate to reload table data
+    if (this.activatedRoute.snapshot.params.dynamicfieldtype) {
       this.router.navigateByUrl(
-      `admin/masterdata/${this.activatedRoute.snapshot.params.type}/${this.activatedRoute.snapshot.params.dynamicfieldtype}/view?${url}`
+        `admin/masterdata/${this.activatedRoute.snapshot.params.type}/${this.activatedRoute.snapshot.params.dynamicfieldtype}/view?${url}`
       );
-    }else{
+    } else {
       this.router.navigateByUrl(
-      `admin/masterdata/${this.activatedRoute.snapshot.params.type}/view?${url}`
+        `admin/masterdata/${this.activatedRoute.snapshot.params.type}/view?${url}`
       );
     }
   }
+  
   pageEvent(event: any) {
     const filters = Utils.convertFilter(
       this.activatedRoute.snapshot.queryParams,
