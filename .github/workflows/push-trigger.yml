@@ -21,6 +21,7 @@ on:
       - 1.*
       - MOSIP*
       - tf_nira_dev
+      - tf_nira_prod
 
 jobs:
   build-admin-ui:
