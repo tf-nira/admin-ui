@@ -45,7 +45,6 @@ export class PacketStatusComponent implements OnInit {
     public dialog: MatDialog
   ) {
     this.languageCode = this.headerService.getUserPreferredLanguage();
-    debugger
     this.username = this.headerService.getUsername();
     translate.use(this.headerService.getUserPreferredLanguage());
     this.translate
