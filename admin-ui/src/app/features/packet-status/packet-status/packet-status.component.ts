@@ -21,7 +21,7 @@ export class PacketStatusComponent implements OnInit {
     //   status: 'Completed'
     // }
   ];
-  username: string;
+  roles: string[] = [];
   showDetails = false;
   showTimeline = false;
   messages: any;
@@ -45,8 +45,7 @@ export class PacketStatusComponent implements OnInit {
     public dialog: MatDialog
   ) {
     this.languageCode = this.headerService.getUserPreferredLanguage();
-    debugger
-    this.username = this.headerService.getUsername();
+    this.roles = this.headerService.getRawRoles();
     translate.use(this.headerService.getUserPreferredLanguage());
     this.translate
     .getTranslation(this.headerService.getUserPreferredLanguage())
