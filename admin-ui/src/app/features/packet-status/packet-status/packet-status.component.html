@@ -7,7 +7,7 @@
             <input matInput placeholder="{{'packet-status.input-text' | translate}}" [(ngModel)]="id"/>
         </mat-form-field>
         <img src="./assets/images/search.png" (click)="search()" alt="search" class="packet-status__image-placer" height="20px" width="20px">
-        <button mat-raised-button (click)="resume()" *ngIf="id && username === 'globaladmin'" style="margin-left: 50px; background-color: #FF4081; color: white;  height: 30px; width: 80px;">
+        <button mat-raised-button (click)="resume()" *ngIf="id && roles.includes('GLOBAL_ADMIN')" style="margin-left: 50px; background-color: #FF4081; color: white;  height: 30px; width: 80px;">
             {{ 'packet-status.resume' | translate }}
         </button>
         <mat-error style="margin-left: 30px ;font-size: 9.5px" *ngIf="error">{{errorMessage | translate}}</mat-error>
