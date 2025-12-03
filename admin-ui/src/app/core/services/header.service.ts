@@ -63,6 +63,14 @@ export class HeaderService {
     }    
   }
 
+  public getRawRoles(): string[] {
+  return this.roles
+    .split(',')
+    .map(r => r.trim())
+    .filter(r => r.length > 0); 
+  }
+
+
 }
 
 
