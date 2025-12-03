@@ -76,6 +76,14 @@ export const navItems = [
     auditEventId: 'ADM-008',
     roles: ['REGISTRATION_ADMIN']
   },
+  {
+    displayName: 'menuItems.item9.title',
+    icon: './assets/images/packet-status.svg',
+    route: '/admin/download-card',
+    children: null,
+    auditEventId: 'ADM-009',
+    roles: ['REGISTRATION_ADMIN']
+  },
   // {
   //   displayName: 'menuItems.item5.title',
   //   icon: './assets/images/id-card.svg',
