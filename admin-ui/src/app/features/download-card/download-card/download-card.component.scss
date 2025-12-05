@@ -110,3 +110,16 @@ h3 {
     background-color: #ff4081!important;
     color: white;
 }
+
+mat-card-actions.action-buttons .reject-message {
+    font-size: 13px !important;
+    font-weight: 600;
+    color: #d9534f;
+    padding-top: 10px;
+}
+
+mat-card-actions.action-buttons .nin-display {
+    font-size: 13px !important;
+    font-weight: bold;
+    padding-top: 10px;
+}

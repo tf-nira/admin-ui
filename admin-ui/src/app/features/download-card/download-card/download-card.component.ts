@@ -31,6 +31,9 @@ export class DownloadCardComponent implements OnInit {
   showDownload = false;
   popupMessages: any;
   subscribed:any;
+  NIN: any;
+  showNinValue: boolean = false;
+  displayNIN: any;   
   constructor(
     private translate: TranslateService,
     private appService: AppConfigService,
@@ -73,10 +76,12 @@ export class DownloadCardComponent implements OnInit {
   captureSelection(selection:string){
     if(selection === 'true'){
       this.showSubmit = false;
-      this.showDownload = true;     
+      this.showDownload = true;
+      this.showNinValue = false;     
     }else{
       this.showSubmit = true;
-      this.showDownload = false;      
+      this.showDownload = false;
+      this.showNinValue = false;      
     }    
   }
 
@@ -94,6 +99,7 @@ export class DownloadCardComponent implements OnInit {
       this.dataStorageService.getCardStatus(this.id).subscribe(response => {        
         if (response['response'] != null) {
           this.data = response['response'].applicantDataMap;
+          this.NIN = response['response'].applicantDataMap['NIN'];
           this.showDetails = true;
           this.renderImage();
           this.getLoginDetails();
@@ -118,6 +124,11 @@ export class DownloadCardComponent implements OnInit {
         },
         disableClose: true
       });
+  }
+
+  getNIN(){
+    this.displayNIN = this.NIN;
+    this.showNinValue = true;
   }
 
   submit(selection) {  

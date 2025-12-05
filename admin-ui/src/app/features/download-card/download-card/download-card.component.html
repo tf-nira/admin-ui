@@ -67,11 +67,24 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <mat-card-actions class="action-buttons" *ngIf="showDownload">
+                                        <!-- <mat-card-actions class="action-buttons" *ngIf="showDownload">
                                             <button id="createButton" mat-raised-button (click)="submit('true')">{{'download-card.download' | translate}}</button>
                                         </mat-card-actions>
                                         <mat-card-actions class="action-buttons" *ngIf="showSubmit">
-                                            <button id="createButton" mat-raised-button (click)="submit('false')">{{'download-card.submit' | translate}}</button>
+                                            <button id="createButton" mat-raised-button (click)="submit('false')">{{'download-card.rejected' | translate}}</button>
+                                        </mat-card-actions> -->
+                                        <mat-card-actions class="action-buttons" *ngIf="showDownload">
+                                            <button id="createButton" mat-raised-button (click)="getNIN()">{{'download-card.getNIN' | translate}}</button>
+                                        </mat-card-actions>
+                                        <mat-card-actions class="action-buttons" *ngIf="showNinValue">
+                                            <div class="nin-display">
+                                                NIN: {{ displayNIN }}
+                                            </div>
+                                        </mat-card-actions>
+                                        <mat-card-actions class="action-buttons" *ngIf="showSubmit">
+                                            <div class="reject-message">
+                                                Face verification failed for this Registration ID. Please provide a valid RID.
+                                            </div>
                                         </mat-card-actions>
                                     </td>
                                 </tr>
