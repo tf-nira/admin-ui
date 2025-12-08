@@ -21,7 +21,6 @@ on:
       - 1.*
       - MOSIP*
       - tf_nira_dev
-      - digital_card
 
 jobs:
   build-admin-ui:
