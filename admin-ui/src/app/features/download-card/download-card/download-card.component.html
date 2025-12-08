@@ -1,11 +1,14 @@
 <div class="packet-status__container">
     <p class="packet-status__header-text">{{'download-card.header' | translate}}</p>
     <mat-card style="border-radius: 0;">
-        <table style="width: 100%;">
-            <caption>Download Card Table</caption>
+        <span style=" font-family: Roboto, sans-serif; margin-left:30px; font-size: 12px;">{{'download-card.text' | translate}}</span>
+        <br><br>
+        <strong><span style="font-family: Roboto, sans-serif; margin-left:630px; font-size: 12px;">{{'download-card.searchLimit' | translate}}&nbsp;{{searchLimitCount}}&nbsp;{{'download-card.outof' | translate}}&nbsp;{{searchLimitMaxCount}}&nbsp;{{'download-card.dailylimit' | translate}}</span></strong>
+        <!-- <table style="width: 100%;">
+            <caption>Retrieve NIN Table</caption>
             <thead>
                 <tr>
-                    <th id="textColumn" style="width: 50%;">
+                    <th id="textColumn" style="border-radius: 0;">
                         <strong><span style="font-family: Roboto, sans-serif; margin-left:30px; font-size: 12px;">{{'download-card.text' | translate}}</span></strong>
                     </th>
                     <th id="limitColumn" style="width: 50%; text-align: right;" *ngIf="searchLimitCount">
@@ -14,11 +17,11 @@
                 </tr>
                 <tr>
                     <th id="downloadCard" colspan="2">
-                        <span style="font-family: Roboto, sans-serif; margin-left: 30px; font-size: 10px;">Download Card</span>
+                        <span style="font-family: Roboto, sans-serif; margin-left: 30px; font-size: 10px;">Retrieve NIN</span>
                     </th>
                 </tr>
             </thead>
-        </table><br>
+        </table><br> -->
         <mat-form-field class="packet-status__input-placer">
             <input matInput placeholder="Enter Registration ID" [(ngModel)]="id"/>
         </mat-form-field>
@@ -29,27 +32,27 @@
         <div class="packet-status__details-container" *ngIf="data">
             <div>
                 <table>
-                    <caption>Download Card Information</caption>
+                    <!-- <caption>Download Card Information</caption> -->
                     <thead>
                         <tr>
-                            <th id="dobHeader">Download Card DOB</th>
-                            <th id="verifyHeader">Download Card Verify</th>
+                            <th id="dobHeader">Applicant Photo</th>
+                            <th id="verifyHeader">Verify Applicant and Retrieve NIN</th>
                         </tr>
                     </thead>
                     <tr>
                         <td><img style="width: 150px;height: 200px;" [src]="applicantPhoto" alt="Applicant"></td>
                         <td>
                             <table>
-                                <caption>Download Card Details</caption>
+                                <caption>Demographic and Biometric Details</caption>
                                 <tr>
                                     <th id="dateOfBirthHeader">{{ 'download-card.dob' | translate }}</th>
                                 </tr>
                                 <tr>
                                     <th id="dateOfBirth">{{ data.dateOfBirth }}</th>
                                 </tr>
-                                <tr>
+                                <!-- <tr>
                                     <th id="verificationHeader">{{ 'download-card.verify' | translate }}</th>
-                                </tr>
+                                </tr> -->
                                 <tr>
                                     <td><strong>{{'download-card.dob' | translate}} :</strong> {{data.dateOfBirth}}</td>
                                 </tr>
@@ -63,7 +66,7 @@
                                           <mat-button-toggle  (click)="captureSelection('false')" value="false"  (keypress)="captureSelection('false')"><mat-icon style="color:red;">clear</mat-icon>&nbsp;&nbsp;{{'download-card.reject' | translate}}</mat-button-toggle>
                                         </mat-button-toggle-group>
                                     </td>
-                                    <th id="actionHeader">Action</th>
+                                    <!-- <th id="actionHeader">Action</th> -->
                                 </tr>
                                 <tr>
                                     <td>

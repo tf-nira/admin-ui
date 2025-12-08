@@ -37,7 +37,7 @@
             "title": "Retrieve Lost RID"
         },
         "item9": {
-            "title": "Download Card"
+            "title": "Retrieve NIN "
         }
     },
     "dashboard": {
@@ -814,15 +814,15 @@
     },
     
     "download-card": {
-        "header": "Download Card",
-        "text": "Please enter a Registration ID to download the digital card",
+        "header": "Retrieve NIN",
+        "text": "Please enter a Registration ID to Retrieve Your NIN",
         "error": "Invalid Registration ID Entered",
         "id": "Registration ID",
         "dob": "Date of Birth",
         "verifyanddownload": "I have verified the face.",
         "reject": "The face does not match.",
         "rejected": "Reject",
-        "getNIN": "Get NIN",
+        "getNIN": "Retrive NIN",
         "download": "Download",
         "searchLimit": "You are left with",
         "outof": "searches out of",
