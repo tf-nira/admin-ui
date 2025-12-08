@@ -92,7 +92,8 @@ export class DownloadCardComponent implements OnInit {
   search() {    
     this.data = "";
     this.errorMessage = '';
-    this.showDownload = false;    
+    this.showDownload = false; 
+    this.showNinValue = false;    
     if (this.id.length !== 29) {
       this.error = true;
     } else {    
