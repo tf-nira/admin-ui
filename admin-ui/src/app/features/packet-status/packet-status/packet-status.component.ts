@@ -131,6 +131,31 @@ export class PacketStatusComponent implements OnInit {
     });
   }
 
+  sentToPerso(){
+    if (!this.id) {
+      this.error = true;
+      this.errorMessage = 'Invalid packet id';
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('rid', this.id);
+    formData.append('langCode', this.headerService.getUserPreferredLanguage());
+
+    this.dataStorageService.sentPacketToPerso(formData).subscribe({
+      next: (response) => {
+        console.log('Sent Packet to Perso API Response:', response);
+        this.error = false;
+        const res: any = response;
+        if (res && res.response && res.response.message && res.response.message == appConstants.Success) {
+          this.showPopup('Success', 'Packet send to Perso Successfully', 'Close', 'success');
+        } else {
+          this.showPopup('Error', res.response.message, 'Close', 'error');
+        }
+      }
+    });
+  }
+
   showPopup(title: string, message: string, buttonText: string, type: 'success' | 'error') {
     this.popupTitle = title;
     this.popupMessage = message;

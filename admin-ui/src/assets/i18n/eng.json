@@ -509,6 +509,7 @@
         "viewMore": "View More",
         "viewLess": "View Less",
         "resume": "Resume",
+        "sentToPerso": "Send to Perso",
         "errorMessages": {
             "title": "Error",
             "message": "RID Not Found",
