@@ -21,6 +21,7 @@ export class PacketStatusComponent implements OnInit {
     //   status: 'Completed'
     // }
   ];
+  showSendToPerso: boolean = false;
   roles: string[] = [];
   showDetails = false;
   showTimeline = false;
@@ -97,6 +98,9 @@ export class PacketStatusComponent implements OnInit {
           this.error = false;
           this.showDetails = true;
           console.log("Final status is ", this.statusCheck)
+
+          this.showSendToPerso = this.data.some(item =>item.transactionTypeCode === 'PRINT_SERVICE' &&
+                item.statusCode === 'PROCESSED' || item.statusCode === 'COMPLETED');
         }
       });
     }
