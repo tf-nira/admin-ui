@@ -1,0 +1,126 @@
+<div class="packet-status__container">
+    <p class="packet-status__header-text">{{'download-card.header' | translate}}</p>
+    <mat-card style="border-radius: 0;">
+        <span style=" font-family: Roboto, sans-serif; margin-left:30px; font-size: 12px;">{{'download-card.text' | translate}}</span>
+        <br><br>
+        <strong><span style="font-family: Roboto, sans-serif; margin-left:630px; font-size: 12px;">{{'download-card.searchLimit' | translate}}&nbsp;{{searchLimitCount}}&nbsp;{{'download-card.outof' | translate}}&nbsp;{{searchLimitMaxCount}}&nbsp;{{'download-card.dailylimit' | translate}}</span></strong>
+        <!-- <table style="width: 100%;">
+            <caption>Retrieve NIN Table</caption>
+            <thead>
+                <tr>
+                    <th id="textColumn" style="border-radius: 0;">
+                        <strong><span style="font-family: Roboto, sans-serif; margin-left:30px; font-size: 12px;">{{'download-card.text' | translate}}</span></strong>
+                    </th>
+                    <th id="limitColumn" style="width: 50%; text-align: right;" *ngIf="searchLimitCount">
+                        <strong><span style="font-family: Roboto, sans-serif; margin-left:30px; font-size: 12px;">{{'download-card.searchLimit' | translate}}&nbsp;{{searchLimitCount}}&nbsp;{{'download-card.outof' | translate}}&nbsp;{{searchLimitMaxCount}}&nbsp;{{'download-card.dailylimit' | translate}}</span></strong>
+                    </th>
+                </tr>
+                <tr>
+                    <th id="downloadCard" colspan="2">
+                        <span style="font-family: Roboto, sans-serif; margin-left: 30px; font-size: 10px;">Retrieve NIN</span>
+                    </th>
+                </tr>
+            </thead>
+        </table><br> -->
+        <mat-form-field class="packet-status__input-placer">
+            <input matInput placeholder="Enter Registration ID" [(ngModel)]="id"/>
+        </mat-form-field>
+        <img src="./assets/images/search.png" (click)="search()" alt="search" class="packet-status__image-placer" height="20px" width="20px" (keypress)="search()">
+        <mat-error style="margin-left: 30px ;font-size: 9.5px" *ngIf="error">{{'download-card.error' | translate}}</mat-error>
+    </mat-card>
+    <mat-card *ngIf="showDetails" style="border-radius: 0;margin-top: 20px;">
+        <div class="packet-status__details-container" *ngIf="data">
+            <div>
+                <table>
+                    <!-- <caption>Download Card Information</caption> -->
+                    <thead>
+                        <tr>
+                            <th id="dobHeader">Applicant Photo</th>
+                            <th id="verifyHeader">Verify Applicant and Retrieve NIN</th>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <td><img style="width: 150px;height: 200px;" [src]="applicantPhoto" alt="Applicant"></td>
+                        <td>
+                            <table>
+                                <caption>Demographic and Biometric Details</caption>
+                                <!-- <tr>
+                                    <th id="dateOfBirthHeader">{{ 'download-card.dob' | translate }}</th>
+                                </tr>
+                                <tr>
+                                    <th id="dateOfBirth">{{ data.dateOfBirth }}</th>
+                                </tr> -->
+                                <!-- <tr>
+                                    <th id="verificationHeader">{{ 'download-card.verify' | translate }}</th>
+                                </tr> -->
+                                <tr>
+                                    <td><strong>{{'download-card.dob' | translate}} :</strong> {{data.dateOfBirth}}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>{{'download-card.verify' | translate}}</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <mat-button-toggle-group name="favoriteColor" aria-label="Favorite Color">
+                                          <mat-button-toggle  (click)="captureSelection('true')" value="true"  (keypress)="captureSelection('true')"><mat-icon style="color: green;">check</mat-icon>&nbsp;&nbsp;{{'download-card.verifyanddownload' | translate}}</mat-button-toggle>
+                                          <mat-button-toggle  (click)="captureSelection('false')" value="false"  (keypress)="captureSelection('false')"><mat-icon style="color:red;">clear</mat-icon>&nbsp;&nbsp;{{'download-card.reject' | translate}}</mat-button-toggle>
+                                        </mat-button-toggle-group>
+                                    </td>
+                                    <!-- <th id="actionHeader">Action</th> -->
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <!-- <mat-card-actions class="action-buttons" *ngIf="showDownload">
+                                            <button id="createButton" mat-raised-button (click)="submit('true')">{{'download-card.download' | translate}}</button>
+                                        </mat-card-actions>
+                                        <mat-card-actions class="action-buttons" *ngIf="showSubmit">
+                                            <button id="createButton" mat-raised-button (click)="submit('false')">{{'download-card.rejected' | translate}}</button>
+                                        </mat-card-actions> -->
+                                        <mat-card-actions class="action-buttons" *ngIf="showDownload">
+                                            <button id="createButton" mat-raised-button (click)="getNIN()">{{'download-card.getNIN' | translate}}</button>
+                                        </mat-card-actions>
+                                        <mat-card-actions class="action-buttons" *ngIf="showNinValue">
+                                            <div class="nin-display">
+                                                NIN: {{ displayNIN }}
+                                            </div>
+                                        </mat-card-actions>
+                                        <mat-card-actions class="action-buttons" *ngIf="showSubmit">
+                                            <div class="reject-message">
+                                                Face verification failed for this Registration ID. Please provide a valid RID.
+                                            </div>
+                                        </mat-card-actions>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>                    
+                </table>
+            </div>
+            <div>
+
+                <!-- <table>
+                    <tr (click)="viewMore()">
+                        <td *ngIf="!showTimeline">{{'download-card.viewMore' | translate}}</td>
+                        <td *ngIf="showTimeline" >{{'download-card.viewLess' | translate}}</td><td>
+                            <i *ngIf="!showTimeline" class="material-icons">keyboard_arrow_down</i>
+                            <i *ngIf="showTimeline" class="material-icons">keyboard_arrow_up</i>
+                        </td>
+                    </tr>
+                </table> -->
+                <!-- <ul *ngIf="showTimeline">
+                    <li *ngFor="let item of data" [ngClass]="item.statusCode === 'SUCCESS' || item.statusCode === 'PROCESSED' ? 'complete' : ''">
+                        <i [ngClass]="item.statusCode === 'IN_PROGRESS' ? 'dot hollow-dot' : item.statusCode === 'SUCCESS' || item.statusCode === 'PROCESSED' ? 'milestone-complete dot' : 'dot incomplete-hollow' "></i>
+                        <h3><div *ngIf = "item.transactionTypeCode">{{item.transactionTypeCode.replace("_", " ")}}</div></h3>
+                        <p *ngIf="item.statusCode === 'SUCCESS'">
+                            {{item.statusComment}},   <span *ngIf = "item.createdDateTimes">{{item.createdDateTimes | date:'medium':'+0530'}} </span>                      
+                         </p>
+                         <p *ngIf="item.statusCode !== 'SUCCESS'" >
+                              <span style="text-transform: capitalize;"><span *ngIf = "item.statusCode">{{item.statusCode.replace("_", " ").toLowerCase()}}</span> , {{item.statusComment}} , <span *ngIf = "item.createdDateTimes">{{item.createdDateTimes | date:'medium':'+0530'}}</span></span>  
+                         </p>
+                    </li>
+                </ul> -->
+            </div>
+        </div>
+
+    </mat-card>
+</div>
