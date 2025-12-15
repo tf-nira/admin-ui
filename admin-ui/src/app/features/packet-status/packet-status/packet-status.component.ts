@@ -151,11 +151,14 @@ export class PacketStatusComponent implements OnInit {
         console.log('Sent Packet to Perso API Response:', response);
         this.error = false;
         const res: any = response;
-        if (res && res.response && res.response.message && res.response.message == appConstants.Success) {
-          this.showPopup('Success', 'Packet send to Perso Successfully', 'Close', 'success');
-        } else {
+        if (res && res.response && res.response.message) {
+          const message = res.response.message;
+          if(message.startsWith('Card details sent')){
+          this.showPopup('Success', res.response.message, 'Close', 'success');
+          } else {
           this.showPopup('Error', res.response.message, 'Close', 'error');
-        }
+          }
+        } 
       }
     });
   }
