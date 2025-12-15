@@ -37,6 +37,13 @@ const routes: Routes = [
           )
       },
       {
+        path: 'download-card',
+        loadChildren: () =>
+          import('./features/download-card/download-card.module').then(
+            m => m.DownloadCardModule
+          )
+      },
+      {
         path: 'rid-status',
         loadChildren: () =>
           import('./features/rid-status/rid-status.module').then(
