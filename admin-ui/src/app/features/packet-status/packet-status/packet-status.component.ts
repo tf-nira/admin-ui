@@ -21,6 +21,7 @@ export class PacketStatusComponent implements OnInit {
     //   status: 'Completed'
     // }
   ];
+  showSendToPerso: boolean = false;
   roles: string[] = [];
   showDetails = false;
   showTimeline = false;
@@ -97,6 +98,9 @@ export class PacketStatusComponent implements OnInit {
           this.error = false;
           this.showDetails = true;
           console.log("Final status is ", this.statusCheck)
+
+          this.showSendToPerso = this.data.some(item =>item.transactionTypeCode === 'PRINT_SERVICE' &&
+                item.statusCode === 'PROCESSED' || item.statusCode === 'COMPLETED');
         }
       });
     }
@@ -127,6 +131,34 @@ export class PacketStatusComponent implements OnInit {
         } else {
           this.showPopup('Error', res.response.message, 'Close', 'error');
         }
+      }
+    });
+  }
+
+  sentToPerso(){
+    if (!this.id) {
+      this.error = true;
+      this.errorMessage = 'Invalid packet id';
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('rid', this.id);
+    formData.append('langCode', this.headerService.getUserPreferredLanguage());
+
+    this.dataStorageService.sentPacketToPerso(formData).subscribe({
+      next: (response) => {
+        console.log('Sent Packet to Perso API Response:', response);
+        this.error = false;
+        const res: any = response;
+        if (res && res.response && res.response.message) {
+          const message = res.response.message;
+          if(message.startsWith('Card details sent')){
+          this.showPopup('Success', res.response.message, 'Close', 'success');
+          } else {
+          this.showPopup('Error', res.response.message, 'Close', 'error');
+          }
+        } 
       }
     });
   }
