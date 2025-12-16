@@ -356,6 +356,13 @@ export class DataStorageService {
     );
   }
 
+  sentPacketToPerso(data: FormData) {
+    return this.http.post(
+      this.BASE_URL  + 'admin'  + '/packetstatusupdate/sentToPerso',
+      data
+    );
+  }
+
   getCreateUpdateSteps(entity: string) {
   return this.http.get(`./assets/create-update-steps/${entity}-steps.json`);
   }
@@ -372,5 +379,19 @@ export class DataStorageService {
 
   getWorkingDays(langCode: string){
     return this.http.get(this.BASE_URL + appConstants.MASTERDATA_BASE_URL + 'workingdays/'+ langCode);
+  }
+
+  getLoginDetails() {
+    return this.http.get(this.BASE_URL + 'admin/applicantDetails/getLoginDetails');
+  }
+
+  getCardStatus(registrationId: string) {
+    return this.http.get(this.BASE_URL + 'admin/applicantDetails/'+registrationId);
+  }
+
+  downloadCard(id:string): Observable<HttpResponse<Blob>> {
+    let buildURL = this.BASE_URL + 'admin/rid-digital-card/'+id+'?isAcknowledged='+true;
+    let response = this.http.get<Blob>(buildURL, { observe: 'response', responseType: 'blob' as 'json' });
+    return response;
   }
 }
