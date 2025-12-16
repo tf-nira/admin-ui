@@ -356,6 +356,13 @@ export class DataStorageService {
     );
   }
 
+   sentPacketToPerso(data: FormData) {
+    return this.http.post(
+      this.BASE_URL  + 'admin'  + '/packetstatusupdate/sentToPerso',
+      data
+    );
+  }
+
   getCreateUpdateSteps(entity: string) {
   return this.http.get(`./assets/create-update-steps/${entity}-steps.json`);
   }
