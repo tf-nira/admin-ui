@@ -1,4 +1,6 @@
-FROM selenium/standalone-chrome:latest
+#FROM selenium/standalone-chrome:latest
+FROM selenium/standalone-chromium:latest
+
 
 USER root
 
