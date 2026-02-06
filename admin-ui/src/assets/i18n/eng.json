@@ -1566,6 +1566,8 @@
         "RPR-MSS-FAILED-009": "VID creation failed",
         "RPR-WIA-001": "Packet workflow internal action completed successfully",
         "RPR-WIA-002": "Packet rejected as number of iterations exceeded permitted limit",
+        "RPR-WIA-003": "Packet paused and additional information requested",
+        "RPR-WIA-004": "Additional information processed successfully; resuming the main packet",
         "RPR-WAS-001": "Packet workflow resumed successfully",
         "RPR-MVS-000": "Manual verification failed",
         "RPR-MVS-001": "Registration Id should not be empty or null",
