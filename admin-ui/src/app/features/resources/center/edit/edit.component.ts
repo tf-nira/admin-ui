@@ -1019,15 +1019,12 @@ export class EditComponent {
     let filterValueObject = {};
     let optinalFilterArray = [];
     optinalFilterArray.push(optinalFilterObject);
-    if(filterValue){
+    if(filterValue)
       filterValueObject = {"columnName":"name","type":"contains","value":filterValue}
-      optinalFilterArray.push(filterValueObject);
-    } 
-    console.log("filterValue>>>"+filterValue+"<<<fillValue>>>"+fillValue);
-    if(fillValue){
+      optinalFilterArray.push(filterValueObject);    
+    if(fillValue)
       filterValueObject = {"columnName":"code","type":"equals","value":fillValue}
-      optinalFilterArray.push(filterValueObject);
-    }              
+      optinalFilterArray.push(filterValueObject);            
     let filterRequest = new FilterRequest([filterObject], this.primaryLang, optinalFilterArray);
     let request = new RequestModel('', null, filterRequest);
     this.dataStorageService
