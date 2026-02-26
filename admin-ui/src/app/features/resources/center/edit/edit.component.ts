@@ -557,7 +557,8 @@ export class EditComponent {
     this.commonForm.controls.centerTypeCode.setValue(
       commonData.centerTypeCode
     );  
-    this.getRegistrationCenterTypes("",commonData.centerTypeCode);    
+    //this.getRegistrationCenterTypes("",commonData.centerTypeCode);
+    this.getRegistrationCenterTypes("",null);    
     this.getHolidayZoneData("",commonData.holidayLocationCode); 
     this.commonForm.controls.contactPhone.setValue(commonData.contactPhone);
     this.commonForm.controls.longitude.setValue(commonData.longitude);
