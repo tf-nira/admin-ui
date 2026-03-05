@@ -89,7 +89,7 @@ export class PacketStatusComponent implements OnInit {
             this.statusCheck = this.messages.statuscheckFailed;
           } else if(this.data[i].statusCode.includes('REJECTED')) {
             this.statusCheck = this.messages.statuscheckRejected;
-          } else if(this.data[i].statusCode.includes('COMPLETED') || this.data[i].statusCode.includes('PROCESSED')) {
+          } else if(this.data[i].statusCode.includes('COMPLETED') || this.data[i].statusCode.includes('PROCESSED') || this.data[i].transactionTypeCode.includes('INTERNAL_WORKFLOW_ACTION') && this.data[i].statusCode.includes('SUCCESS')) {
             this.statusCheck = this.messages.statuscheckCompleted;
           } else {
             this.statusCheck = this.messages.statuscheckInProgress;
