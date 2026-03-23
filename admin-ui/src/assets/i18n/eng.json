@@ -1375,6 +1375,7 @@
         "RPR-QCK-SUCCESS-001": "Individual Biometric Parameter Not Found in ID JSON",
         "RPR-QCK-FAILED-001": "Quality Score of Biometrics Captured is Below Threshold",
         "RPR-QCK-SUCCESS-002": "Biometric Quality Check is Successful",
+        "RPR-QCK-SUCCESS-003": "Biometric classification skipped as applicant age is <= 2 or >= 70",
         "RPR-PKV-SUCCESS-001": "Packet Validation is Successful",
         "RPR-PKV-FAILED-001": "File Validation Failed",
         "RPR-PKV-FAILED-002": "Schema Validation Failed",
