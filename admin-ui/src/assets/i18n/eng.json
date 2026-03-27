@@ -1598,6 +1598,7 @@
         "RPR-CV-020": "Citizenship Verification packet on hold",
         "RPR-CV-021": "On-demand migration",
         "RPR-CV-022": "CVS failed due to age difference with the applicant being less than 15 years",
-        "RPR-CV-023": "On-demand migration is in progress"
+        "RPR-CV-023": "On-demand migration is in progress",
+        "KER-MSD-APT":"Center Type already exist"
     }
 }
