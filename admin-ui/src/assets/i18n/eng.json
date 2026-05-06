@@ -1599,6 +1599,7 @@
         "RPR-CV-021": "On-demand migration",
         "RPR-CV-022": "CVS failed due to age difference with the applicant being less than 15 years",
         "RPR-CV-023": "On-demand migration is in progress",
-		"RPR-PKV-FAILED-025": "The individual associated with NIN is deceased."
+		"RPR-PKV-FAILED-025": "The individual associated with NIN is deceased.",
+		"RPR-PKV-FAILED-024": "Renewal rejected - Not allowed within 10 years"
     }
 }
