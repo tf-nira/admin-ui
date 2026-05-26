@@ -509,6 +509,7 @@
         "viewMore": "View More",
         "viewLess": "View Less",
         "resume": "Resume",
+        "matchedRid":"MA Matches",
         "errorMessages": {
             "title": "Error",
             "message": "RID Not Found",
@@ -1448,7 +1449,7 @@
         "RPR-MVS-FAILED-002": "Manual verification from MVS failed",
         "RPR-DDP-FAILED-002": "Potential Demo Match was Found",
         "RPR-MNV-SUCCESS-001": "Match Not Found by Manual Verifier",
-        "RPR-MNV-FAILED-001": "Match Found by Manual Verifier",
+        "RPR-MNV-FAILED-002": "Match Found by Manual Verifier",
         "RPR-UIN-SUCCESS-001": "UIN Generated Successfully",
         "RPR-UIN-SUCCESS-002": "UIN Data is Updated Successfully",
         "RPR-UIN-FAILED-001": "UIN is already Activated",

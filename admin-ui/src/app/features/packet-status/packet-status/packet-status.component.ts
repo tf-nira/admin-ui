@@ -21,6 +21,7 @@ export class PacketStatusComponent implements OnInit {
     //   status: 'Completed'
     // }
   ];
+  showMatchedRid: boolean = false;
   roles: string[] = [];
   showDetails = false;
   showTimeline = false;
@@ -96,7 +97,10 @@ export class PacketStatusComponent implements OnInit {
           console.log("status for ", this.data[i].transactionTypeCode, "is ", this.statusCheck);
           this.error = false;
           this.showDetails = true;
-          console.log("Final status is ", this.statusCheck)
+
+          this.showMatchedRid = this.data.some(item =>item.transactionTypeCode === 'MANUAL_ADJUDICATION' 
+            && item.statusCode === 'FAILED' && item.statusComment === 'Match Found by Manual Verifier'
+          );
         }
       });
     }
@@ -126,6 +130,33 @@ export class PacketStatusComponent implements OnInit {
           this.showPopup('Success', 'Packet Resumed Successfully', 'Close', 'success');
         } else {
           this.showPopup('Error', res.response.message, 'Close', 'error');
+        }
+      }
+    });
+  }
+
+  getMatchedRid() {
+    if (!this.id) {
+      this.error = true;
+      this.errorMessage = 'Invalid packet id';
+      return;
+    }
+    this.dataStorageService.getMatchedPacketRid(this.id, this.headerService.getUserPreferredLanguage()).subscribe({
+      next: (response) => {
+        console.log('Get Matched RID API Response:', response);
+        this.error = false;
+        const res: any = response;
+        let message = res.response.message;
+        if (!message[0].startsWith('No')) {
+          let formattedMessage = '';
+          if (message[0].startsWith('Biometric')) {
+            formattedMessage = message.join('<br>');
+          } else {
+            formattedMessage = "<b>Matched RID's:</b><br><br>" + message.map(rid => `'${rid}'`).join('<br>');
+        }
+          this.showPopup('Success', formattedMessage , 'Close', 'success');
+        } else {
+          this.showPopup('Error', message, 'Close', 'error');
         }
       }
     });
