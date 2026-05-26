@@ -99,7 +99,7 @@ export class PacketStatusComponent implements OnInit {
           this.showDetails = true;
 
           this.showMatchedRid = this.data.some(item =>item.transactionTypeCode === 'MANUAL_ADJUDICATION' 
-            && item.statusCode === 'FAILED' && item.statusComment === 'Match Found by Manual Verifier'
+            && item.statusCode === 'FAILED'
           );
         }
       });
