@@ -1538,7 +1538,7 @@
         "RPR-PPS-FAILED-010": "UIN not found in database",
         "RPR-PRT-011": "VID not available",
         "RPR-BAU-SUCCESS-002": "Biometric Authentication is Skipped",
-	"RPR-PKCSUCCESS-001" : "Packet Classification is Successful",
+		"RPR-PKCSUCCESS-001" : "Packet Classification is Successful",
         "RPR-DDP-SKIPPED-003": "Demographic Deduplication Skipped",
         "RPR-MNV-FAILED-003": "Error in manual verification",
         "RPR-MVS-002": "Manual verification request sent to queue",
