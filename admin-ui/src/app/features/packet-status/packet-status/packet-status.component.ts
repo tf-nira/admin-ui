@@ -98,9 +98,7 @@ export class PacketStatusComponent implements OnInit {
           this.error = false;
           this.showDetails = true;
 
-          this.showMatchedRid = this.data.some(item =>item.transactionTypeCode === 'MANUAL_ADJUDICATION' 
-            && item.statusCode === 'FAILED'
-          );
+          this.showMatchedRid = this.data.some(item =>item.transactionTypeCode === 'MANUAL_ADJUDICATION' );
         }
       });
     }
