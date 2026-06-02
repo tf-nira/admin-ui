@@ -356,6 +356,11 @@ export class DataStorageService {
     );
   }
 
+  getMatchedPacketRid(registrationId: string, langCode: string) {
+    const params = new HttpParams().set('rid', registrationId).set('langCode', langCode);
+    return this.http.get(this.BASE_URL + 'admin/packetstatusupdate/manual-verification', {params});
+  }
+
   sentPacketToPerso(data: FormData) {
     return this.http.post(
       this.BASE_URL  + 'admin'  + '/packetstatusupdate/sentToPerso',
