@@ -497,6 +497,7 @@
         "viewMore": "View More",
         "viewLess": "View Less",
         "resume": "Resume",
+		"matchedRid":"MA Matches",
 		"sentToPerso": "Send to Perso",
         "errorMessages": {
             "title": "Error",
@@ -1435,7 +1436,7 @@
         "RPR-MVS-SUCCESS-001": "Manual verification from MVS success",
         "RPR-MVS-FAILED-002": "Manual verification from MVS failed",
         "RPR-DDP-FAILED-002": "Potential Demo Match was Found",
-        "RPR-MNV-SUCCESS-001": "Match Not Found by Manual Verifier",
+        "RPR-MNV-SUCCESS-002": "Match Not Found by Manual Verifier",
         "RPR-MNV-FAILED-001": "Match Found by Manual Verifier",
         "RPR-UIN-SUCCESS-001": "UIN Generated Successfully",
         "RPR-UIN-SUCCESS-002": "UIN Data is Updated Successfully",
