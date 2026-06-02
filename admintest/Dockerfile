@@ -1,5 +1,6 @@
 #FROM selenium/standalone-chrome:latest
-FROM selenium/standalone-chrome:4.33.0
+#FROM selenium/standalone-chrome:4.33.0
+FROM --platform=linux/amd64 selenium/standalone-chrome:4.33.0
 
 USER root
 
