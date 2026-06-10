@@ -152,7 +152,7 @@ export class PacketStatusComponent implements OnInit {
         let message = res.response.message;
         if (!message[0].startsWith('No')) {
           let formattedMessage = '';
-          if (message[0].startsWith('Biometric')) {
+          if (message[0].startsWith('Biometric') || message[0].startsWith('App')) {
             formattedMessage = message.join('<br>');
           } else {
             formattedMessage = "<b>Matched RID's:</b><br><br>" + message.map(rid => `'${rid}'`).join('<br>');
