@@ -494,6 +494,7 @@
         "viewMore": "View More",
         "viewLess": "View Less",
         "resume": "Resume",
+		"matchedRid":"MA Matches",
 		"sentToPerso": "Send to Perso",
         "errorMessages": {
             "title": "Error",
