@@ -34,7 +34,7 @@ export class PacketStatusComponent implements OnInit {
   popupMessage = '';
   popupTitle = '';
   popupButtonText = 'Done';
-  popupType: 'success' | 'error' = 'error';
+  popupType: 'success' | 'message' | 'error' = 'error';
   id = '';
   error = false;
   errorMessage = '';
@@ -157,13 +157,13 @@ export class PacketStatusComponent implements OnInit {
         }
           this.showPopup('Success', formattedMessage , 'Close', 'success');
         } else {
-          this.showPopup('Error', message, 'Close', 'error');
+          this.showPopup('Message', message, 'Close', 'message');
         }
       }
     });
   }
 
-  showPopup(title: string, message: string, buttonText: string, type: 'success' | 'error') {
+  showPopup(title: string, message: string, buttonText: string, type: 'success' | 'error' | 'message') {
     this.popupTitle = title;
     this.popupMessage = message;
     this.popupButtonText = buttonText;
