@@ -155,7 +155,7 @@ export class PacketStatusComponent implements OnInit {
           } else {
             formattedMessage = "<b>Matched RID's:</b><br><br>" + message.map(rid => `'${rid}'`).join('<br>');
         }
-          this.showPopup('Success', formattedMessage , 'Close', 'success');
+          this.showPopup('Message', formattedMessage , 'Close', 'message');
         } else {
           this.showPopup('Message', message, 'Close', 'message');
         }
