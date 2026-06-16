@@ -148,13 +148,13 @@ export class PacketStatusComponent implements OnInit {
         this.error = false;
         const res: any = response;
         let message = res.response.message;
-        if (!message[0].startsWith('No') || !message[0].startsWith('Biometric')) {
+        if (!message[0].startsWith('No') && !message[0].startsWith('Biometric')) {
           let formattedMessage = '';
           if (message[0].startsWith('App')) {
             formattedMessage = message.join('<br>');
           } else {
             formattedMessage = "<b>Matched RID's:</b><br><br>" + message.map(rid => `'${rid}'`).join('<br>');
-        }
+          }
           this.showPopup('Message', formattedMessage , 'Close', 'message');
         } else {
           this.showPopup('Message', message, 'Close', 'message');
