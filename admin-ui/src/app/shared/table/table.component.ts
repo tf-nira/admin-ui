@@ -66,21 +66,21 @@ export class TableComponent implements OnInit, OnChanges {
       this.columnsOfTableData.push(column['name']);
     });
     this.setSortDirection();
+    if (!this.sortData || this.sortData.length === 0) {
+      this.sortIconTrackerArray = new Array(this.displayedColumns.length).fill(0);
+    }
   }
 
   setSortDirection() {
-    if (this.sortData) {
-      this.sortData.forEach((data: SortModel) => {
-        if (this.sortStatusArray.indexOf(data.sortField) === -1) {
-          this.sortStatusArray.push(data.sortField);
-        }
-        const index = this.columnsOfTableData.indexOf(data.sortField);
-        if (data.sortType.toLowerCase() === 'asc') {
-          this.sortIconTrackerArray[index] = 1;
-        } else if (data.sortType.toLowerCase() === 'desc') {
-          this.sortIconTrackerArray[index] = -1;
-        }
-      });
+    this.sortIconTrackerArray = new Array(this.displayedColumns.length).fill(0);
+
+    if (this.sortData && this.sortData.length > 0) {
+      const data = this.sortData[0];
+      const index = this.columnsOfTableData.indexOf(data.sortField);
+      if (index !== -1) {
+        this.sortIconTrackerArray[index] =
+          data.sortType.toLowerCase() === 'asc' ? 1 : -1;
+      }
     }
   }
 
@@ -144,26 +144,17 @@ export class TableComponent implements OnInit, OnChanges {
       masterdataName: this.router.url.split('/')[3],
       columnName
     });
-    const sortObject = this.sortData.filter(
-      data => data.sortField === columnName
-    );
-    let sortModel = new SortModel();
-    if (sortObject.length === 0) {
-      sortModel.sortField = columnName;
-      sortModel.sortType = 'asc';
-      this.sortIconTrackerArray[columnIndex] = 1;
-    } else {
-      sortModel = sortObject[0];
-      if (sortModel.sortType.toLowerCase() === 'asc') {
-        sortModel.sortType = 'desc';
-        this.sortIconTrackerArray[columnIndex] = -1;
-      } else if (sortModel.sortType.toLowerCase() === 'desc') {
-        sortModel.sortType = 'asc';
-        this.sortIconTrackerArray[columnIndex] = 1;
-      }
+    this.sortIconTrackerArray = new Array(this.displayedColumns.length).fill(0);
+    let sortType: 'asc' | 'desc' = 'asc';
+    const previousSort = this.sortData && this.sortData[0];
+    if (previousSort && previousSort.sortField === columnName) {
+      sortType = previousSort.sortType.toLowerCase() === 'asc' ? 'desc' : 'asc';
     }
-    console.log(this.sortStatusArray);
-    console.log(sortModel);
+    this.sortIconTrackerArray[columnIndex] = sortType === 'asc' ? 1 : -1;
+    const sortModel = new SortModel();
+    sortModel.sortField = columnName;
+    sortModel.sortType = sortType;
+    this.sortData = [sortModel];
     this.sort.emit(sortModel);
   }
 
