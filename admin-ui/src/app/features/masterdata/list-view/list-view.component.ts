@@ -124,16 +124,11 @@ export class ListViewComponent implements OnDestroy {
 
   getSortColumn(event: SortModel) {
     console.log(event);
-    this.sortFilter.forEach(element => {
-      if (element.sortField === event.sortField) {
-        const index = this.sortFilter.indexOf(element);
-        this.sortFilter.splice(index, 1);
-      }
-    });
+    this.sortFilter = [];
     if (event.sortType != null) {
       this.sortFilter.push(event);
     }
-    console.log(this.sortFilter);
+    console.log('Updated sortFilter:', this.sortFilter);
     const filters = Utils.convertFilter(
       this.activatedRoute.snapshot.queryParams,
       this.appService.getConfig().primaryLangCode
