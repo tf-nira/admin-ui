@@ -21,6 +21,7 @@ export class PacketStatusComponent implements OnInit {
     //   status: 'Completed'
     // }
   ];
+  hideMatchedRid: boolean = true;
   showMatchedRid: boolean = false;
   showSendToPerso: boolean = false;
   roles: string[] = [];
@@ -34,7 +35,7 @@ export class PacketStatusComponent implements OnInit {
   popupMessage = '';
   popupTitle = '';
   popupButtonText = 'Done';
-  popupType: 'success' | 'error' = 'error';
+  popupType: 'success' | 'message' | 'error' = 'error';
   id = '';
   error = false;
   errorMessage = '';
@@ -104,6 +105,8 @@ export class PacketStatusComponent implements OnInit {
                 item.statusCode === 'PROCESSED' || item.statusCode === 'COMPLETED');
 
           this.showMatchedRid = this.data.some(item =>item.transactionTypeCode === 'MANUAL_ADJUDICATION' );
+          this.hideMatchedRid = !this.data.some(item =>item.transactionTypeCode === 'MANUAL_ADJUDICATION' 
+            && item.statusCode === 'SUCCESS');
         }
       });
     }
@@ -150,16 +153,16 @@ export class PacketStatusComponent implements OnInit {
         this.error = false;
         const res: any = response;
         let message = res.response.message;
-        if (!message[0].startsWith('No')) {
+        if (!message[0].startsWith('No') && !message[0].startsWith('Biometric')) {
           let formattedMessage = '';
-          if (message[0].startsWith('Biometric') || message[0].startsWith('App')) {
+          if (message[0].startsWith('App')) {
             formattedMessage = message.join('<br>');
           } else {
             formattedMessage = "<b>Matched RID's:</b><br><br>" + message.map(rid => `'${rid}'`).join('<br>');
-        }
-          this.showPopup('Success', formattedMessage , 'Close', 'success');
+          }
+          this.showPopup('Message', formattedMessage , 'Close', 'message');
         } else {
-          this.showPopup('Error', message, 'Close', 'error');
+          this.showPopup('Message', message, 'Close', 'message');
         }
       }
     });
@@ -193,7 +196,7 @@ export class PacketStatusComponent implements OnInit {
     });
   }
 
-  showPopup(title: string, message: string, buttonText: string, type: 'success' | 'error') {
+  showPopup(title: string, message: string, buttonText: string, type: 'success' | 'error' | 'message') {
     this.popupTitle = title;
     this.popupMessage = message;
     this.popupButtonText = buttonText;
