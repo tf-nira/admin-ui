@@ -52,6 +52,10 @@ export class DialogComponent implements OnInit {
   rangeError = false;
   fieldName = '';
 
+  showConfirmCancelButtons = false;
+  title = '';
+  message = '';
+
   cancelApplied = false;
 
   filterOptions: any = {};
@@ -95,6 +99,14 @@ export class DialogComponent implements OnInit {
     if (this.input.case === 'STEPS-MESSAGE') {
       await this.getStepsForCreateUpate();
     }
+    if (this.input.case === 'CONFIRM_CREATE') {
+      this.title = this.input.title || 'Confirm Creation';
+      this.message =
+      this.input.message ||
+        'You are about to create a Center Type. Please ensure that all the information is correct.';
+      this.showConfirmCancelButtons = true;
+}
+
   }
 
   get f() {
@@ -508,4 +520,8 @@ export class DialogComponent implements OnInit {
         });
     });
   }
+  closeDialog(result?: boolean): void {
+  this.dialogRef.close(result);
+  }
+
 }

@@ -800,7 +800,31 @@ export class MaterDataCommonBodyComponent implements OnInit {
     return dialogRef.afterClosed();
   }
 
-  executeAPI(){    
+
+executeAPI() {
+  const typesNeedingConfirmation = ['center-type'];
+
+  let url = this.router.url.split('/')[3];
+  if (this.isCreateForm && typesNeedingConfirmation.includes(url)) {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '650px',
+      data: {
+        case: 'CONFIRM_CREATE',
+        title: 'Confirm Creation',
+        message: 'You are about to create a Center Type. Please ensure that all the information is correct.'
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.performExecuteAPI();
+      }
+    });
+  } else {
+    this.performExecuteAPI();
+  }
+}
+
+  performExecuteAPI(){    
     let url = this.router.url.split('/')[3];
     this.dataStorageService
     .getSpecFileForMasterDataEntity(this.mapping.specFileName)

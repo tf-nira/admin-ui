@@ -302,4 +302,21 @@
   </div>
 </div>
 
+
+<div *ngIf="showConfirmCancelButtons" class="confirmation-container">
+  <h2 mat-dialog-title>{{ title }}</h2>
+  <mat-dialog-content>
+    <p>{{ message }}</p>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-flat-button color="primary" (click)="closeDialog(true)">
+      Confirm
+    </button>
+    <button mat-stroked-button color="warn" (click)="closeDialog(false)">
+      Cancel
+    </button>
+  </mat-dialog-actions>
+</div>
+
 </div>
