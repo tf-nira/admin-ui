@@ -10,7 +10,7 @@
         <button mat-raised-button (click)="resume()" *ngIf="id && roles.includes('GLOBAL_ADMIN')" style="margin-left: 50px; background-color: #FF4081; color: white;  height: 30px; width: 80px;">
             {{ 'packet-status.resume' | translate }}
         </button>
-        <button mat-raised-button (click)="getMatchedRid()" *ngIf="id && showMatchedRid && hideMatchedRid && roles.includes('GLOBAL_ADMIN') && roles.includes('REGISTRATION_ADMIN')" style="margin-left: 50px; background-color: #FF4081; color: white;  height: 30px; width: 120px;">
+        <button mat-raised-button (click)="getMatchedRid()" *ngIf="id && showMatchedRid && roles.includes('GLOBAL_ADMIN') && roles.includes('REGISTRATION_ADMIN')" style="margin-left: 50px; background-color: #FF4081; color: white;  height: 30px; width: 120px;">
             {{ 'packet-status.matchedRid' | translate }}
         </button>
         <mat-error style="margin-left: 30px ;font-size: 9.5px" *ngIf="error">{{errorMessage | translate}}</mat-error>
