@@ -21,7 +21,6 @@ export class PacketStatusComponent implements OnInit {
     //   status: 'Completed'
     // }
   ];
-  hideMatchedRid: boolean = true;
   showMatchedRid: boolean = false;
   roles: string[] = [];
   showDetails = false;
@@ -98,12 +97,23 @@ export class PacketStatusComponent implements OnInit {
           console.log("status for ", this.data[i].transactionTypeCode, "is ", this.statusCheck);
           this.error = false;
           this.showDetails = true;
-
-          this.showMatchedRid = this.data.some(item =>item.transactionTypeCode === 'MANUAL_ADJUDICATION' );
-          this.hideMatchedRid = !this.data.some(item =>item.transactionTypeCode === 'MANUAL_ADJUDICATION' 
-            && item.statusCode === 'SUCCESS');
+          this.showMatchedRid = this.getShowMatchedRid(this.data);
         }
       });
+    }
+  }
+
+  getShowMatchedRid(data: any[]): boolean {
+    const maList = this.data.filter(item => item.transactionTypeCode === 'MANUAL_ADJUDICATION');
+    if (maList.length > 0) {
+      const latestMA = maList[maList.length - 1];
+      if (latestMA.statusCode === 'SUCCESS') {
+        return false;
+      } else {
+        return true;
+      }
+    } else {
+      return false;
     }
   }
 
